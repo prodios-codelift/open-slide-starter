@@ -26,8 +26,24 @@ index 5a7509e..ec38d1d 100644
          ? [
              {
                id: 'restart-dev-server',
+diff --git a/node_modules/@open-slide/core/src/app/components/overview-grid.tsx b/node_modules/@open-slide/core/src/app/components/overview-grid.tsx
+index 3fba1c9..d7af2b2 100644
+--- a/node_modules/@open-slide/core/src/app/components/overview-grid.tsx
++++ b/node_modules/@open-slide/core/src/app/components/overview-grid.tsx
+@@ -141,7 +141,10 @@ export function OverviewGrid({
+           <div
+             className="grid justify-center gap-5"
+             style={{
+-              gridTemplateColumns: `repeat(auto-fill, ${THUMB_W}px)`,
++              // open-slide-starter: a hard THUMB_W px track let a card clip past a narrow
++              // container's edge instead of wrapping — cap each track at the container's own
++              // width so a card never exceeds it, stacking to one column when only one fits.
++              gridTemplateColumns: `repeat(auto-fill, minmax(min(${THUMB_W}px, 100%), 1fr))`,
+             }}
+           >
+             {pages.map((PageComp, i) => {
 diff --git a/node_modules/@open-slide/core/src/app/routes/slide.tsx b/node_modules/@open-slide/core/src/app/routes/slide.tsx
-index 009bde3..3552dc0 100644
+index 009bde3..828c049 100644
 --- a/node_modules/@open-slide/core/src/app/routes/slide.tsx
 +++ b/node_modules/@open-slide/core/src/app/routes/slide.tsx
 @@ -125,7 +125,8 @@ export function Slide() {
@@ -40,11 +56,34 @@ index 009bde3..3552dc0 100644
    const [commandOpen, setCommandOpen] = useState(false);
    const [, setWarmedTick] = useState(0);
    const handleAssetsWarmed = useCallback(() => {
-@@ -653,7 +654,6 @@ export function Slide() {
+@@ -618,7 +619,11 @@ export function Slide() {
+         <SelectionReporter />
+         <div className="flex h-dvh flex-col overflow-hidden bg-sidebar text-foreground">
+           {/* Toolbar sits directly on the chrome ground — three zones, mono-folio center */}
+-          <header className="relative flex h-12 shrink-0 items-center gap-2 px-2 md:px-3">
++          {/* open-slide-starter: md+ used to center the title absolutely against the header's
++              full width, so it collided with whichever side group was wider (ours has 3 buttons
++              on the right — Design/Format/Present). A real grid column centers it against the
++              true remaining space instead, regardless of how asymmetric the side groups are. */}
++          <header className="flex h-12 shrink-0 items-center gap-2 px-2 md:grid md:grid-cols-[auto_1fr_auto] md:px-3">
+             <div className="flex flex-1 items-center gap-1.5 md:flex-none md:gap-2">
+               {showSlideBrowser && (
+                 <button
+@@ -653,13 +658,12 @@ export function Slide() {
                    </TabsList>
                  </Tabs>
                )}
 -              {import.meta.env.DEV && <AgentConnectedBadge />}
              </div>
  
-             {/* On md+ the title centers to the viewport via absolute positioning. On mobile the
+-            {/* On md+ the title centers to the viewport via absolute positioning. On mobile the
+-                two side groups each flex-1, so the in-flow title lands at the viewport center too —
+-                and min-w-0 lets it truncate instead of overlapping the icons on narrow widths. */}
+-            <div className="pointer-events-none relative flex min-w-0 justify-center px-2 md:absolute md:inset-x-0">
++            {/* On mobile the two side groups each flex-1, so the in-flow title lands at the
++                viewport center too — and min-w-0 lets it truncate instead of overlapping the
++                icons on narrow widths. On md+ it's the grid's own middle 1fr column. */}
++            <div className="pointer-events-none flex min-w-0 justify-center px-2">
+               <div className="pointer-events-auto min-w-0 max-w-[34rem]">
+                 <InlineTitleEditor title={title} onSubmit={(next) => renameSlide(slideId, next)} />
+               </div>
