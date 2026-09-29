@@ -1,64 +1,21 @@
-# open-slide workspace
+# open-slide starter
 
-Slides as React components. Each slide lives under `slides/<id>/index.tsx` and default-exports an array of page components. The `@open-slide/core` runtime handles layout, scaling, navigation, thumbnails, and fullscreen play mode — you just write the pages.
+The presentation workspace for Prodios Autopilot. Autopilot runs it in a sandbox; a builder agent writes the deck while the user edits, comments and exports it in open-slide's own UI.
 
-## Getting started
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Then open the dev server and edit `slides/getting-started/index.tsx`, or create a new slide at `slides/<your-slide>/index.tsx`.
+- Deck: `slides/deck/index.tsx`. Style previews: `slides/previews/index.tsx` (pages A, B, C).
+- Themes: `themes/*.md`, read by `create-slide` and `autopilot-previews`.
+- Agent rules: `AGENTS.md` (the Prodios Autopilot section) and `.agents/skills/`.
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the dev server with hot reload. |
-| `pnpm build` | Build a static bundle you can deploy. |
-| `pnpm preview` | Preview the built bundle locally. |
+- `npm run dev` — open-slide on `0.0.0.0:3000`.
+- `npm run typecheck`
+- `npm run build` — static build (not used by Autopilot).
 
-## Authoring a slide
+## Core version and patch
 
-```tsx
-// slides/my-slide/index.tsx
-import type { Page, SlideMeta } from '@open-slide/core';
+`@open-slide/core` is pinned to `2.0.1`. `patches/@open-slide+core+2.0.1.patch` (applied on `npm install`) makes dev honour `build.showSlideBrowser`, hides restart and the agent badge, and lets `/s/<id>?overview` open the page grid. When bumping core: update the pin, re-apply the three changes, run `npx patch-package @open-slide/core`, and re-check. Never edit the built-in skills; they belong to core.
 
-const Cover: Page = () => (
-  <div style={{ width: '100%', height: '100%' }}>Hello</div>
-);
+## Checks
 
-export const meta: SlideMeta = { title: 'My slide' };
-export default [Cover] satisfies Page[];
-```
-
-Every page renders into a fixed **1920 × 1080** canvas — design with absolute pixel values. Put images, videos, and fonts under `slides/<id>/assets/` and import them directly.
-
-See [`CLAUDE.md`](./CLAUDE.md) for the full authoring guide.
-
-## Navigation
-
-- Arrow keys / PageUp / PageDown move between pages.
-- `F` enters fullscreen play mode; Esc exits.
-- In play mode: Space / → next, ← prev.
-
-## Claude Code integration
-
-This workspace ships with Claude Code skills preconfigured under `.claude/skills/` and `.agents/skills/`. Ask Claude Code to "make slides about X" and the `create-slide` skill takes over. Use `apply-comments` to iterate via inspector-style markers inside your source.
-
-## Config
-
-Optional `open-slide.config.ts` at the workspace root:
-
-```ts
-import type { OpenSlideConfig } from '@open-slide/core';
-
-const openSlideConfig: OpenSlideConfig = {
-  port: 5173,
-};
-
-export default openSlideConfig;
-```
-
-Supported fields: `slidesDir`, `port`.
+`agent-browser eval "$(cat scripts/verify-slides.js)"` on `/s/<id>?p=<n>` reports build errors, missing slides, clipped text, content past the canvas and overlapping panels.

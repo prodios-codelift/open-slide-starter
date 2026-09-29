@@ -21,6 +21,23 @@ You are authoring **slides** in this repo. Every slide is arbitrary React code t
 
 Keep this file short: hard rules only. All deeper guidance lives in the skills above.
 
+## Prodios Autopilot
+
+When this workspace runs inside Prodios Autopilot, a builder agent works here while the user watches the deck in a panel. These rules add to the hard rules above.
+
+- **The user isn't in this session.** Use the answers in your prompt. If something important is still unclear, ask with the `ask_questions` tool — only what the prompt doesn't answer, all questions in one call, then stop; the answers arrive as your next message. Wherever a skill says `AskUserQuestion`, use `ask_questions` the same way. After answers arrive, re-read any file before editing it: the user may have edited the deck meanwhile.
+- **Fixed ids.** The deck is `slides/deck/index.tsx` — never another id. Style previews are `slides/previews/index.tsx`: one slide, three pages, A = page 1, B = page 2, C = page 3.
+- **Which skill:**
+  - Style previews → `autopilot-previews`.
+  - A new deck → `create-slide`. Its questions are answered in your prompt (theme, density, motion; the outline sets the page count), so don't ask them again. The slide id is `deck`. Skip its hand-off step and end with a short summary instead.
+  - Changes to the deck → `slide-authoring`. Comments left with the inspector → `apply-comments` on `slides/deck`.
+- **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder).
+- **Before you finish:**
+  - `npm run typecheck` passes.
+  - For every page: `agent-browser open "http://localhost:3000/s/<id>?p=<n>"`, then `agent-browser eval "$(cat scripts/verify-slides.js)"` returns no issues. Take a screenshot and look at it (see `.agents/skills/agent-browser/SKILL.md`).
+  - If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix the cause.
+- The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.
+
 ## Updating skills
 
 The skills above are managed by `@open-slide/core`. Do not edit them in place. To pull the latest versions:
