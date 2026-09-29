@@ -90,17 +90,21 @@
   const scale = bounds.width / CANVAS_WIDTH;
   const issues = [];
 
+  // Ancestors of [data-bleed] content (including the framework's own per-page host
+  // div, which is always overflow-hidden) always "overflow" once a bled element
+  // escapes the canvas — that's the point of bleed. Hide bled elements just for the
+  // clipped pass so their intentional overflow can't inflate an ancestor's
+  // scrollWidth/Height; a genuinely clipped ancestor still shows it with them hidden.
+  const bledElements = [...canvas.querySelectorAll('[data-bleed]')];
+  const savedDisplay = bledElements.map((el) => el.style.display);
+  for (const el of bledElements) el.style.display = 'none';
+  await nextFrame();
+
   for (const el of canvas.querySelectorAll('*')) {
     if (el.closest('[data-verify-ignore]') || !isRendered(el)) continue;
     const style = getComputedStyle(el);
-    const rect = el.getBoundingClientRect();
 
-    // The framework's own per-page host div (canvas's direct child) is always
-    // overflow-hidden and always "overflows" whenever any descendant escapes the
-    // canvas — including one under [data-bleed]. Skip it; a real clipped bug is
-    // still caught one level down, on the element that actually owns the overflow.
     if (
-      el.parentElement !== canvas &&
       clipsContent(style) &&
       (el.scrollHeight > el.clientHeight + TOLERANCE || el.scrollWidth > el.clientWidth + TOLERANCE)
     ) {
@@ -110,6 +114,17 @@
         detail: `content ${el.scrollWidth}×${el.scrollHeight} in a ${el.clientWidth}×${el.clientHeight} box`,
       });
     }
+  }
+
+  bledElements.forEach((el, i) => {
+    el.style.display = savedDisplay[i];
+  });
+  await nextFrame();
+
+  for (const el of canvas.querySelectorAll('*')) {
+    if (el.closest('[data-verify-ignore]') || !isRendered(el)) continue;
+    const style = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
 
     if (
       !el.closest('[data-bleed]') &&

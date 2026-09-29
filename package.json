@@ -7,7 +7,7 @@
     "dev": "open-slide dev --host 0.0.0.0 --port 3000 --no-skills-check",
     "build": "open-slide build",
     "typecheck": "tsc --noEmit",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package --error-on-fail"
   },
   "dependencies": {
     "@open-slide/core": "2.0.1",
