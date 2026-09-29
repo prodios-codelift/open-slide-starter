@@ -1,0 +1,50 @@
+diff --git a/node_modules/@open-slide/core/dist/config-hT1o6Jct.js b/node_modules/@open-slide/core/dist/config-hT1o6Jct.js
+index 76f82bc..2b6ebfe 100644
+--- a/node_modules/@open-slide/core/dist/config-hT1o6Jct.js
++++ b/node_modules/@open-slide/core/dist/config-hT1o6Jct.js
+@@ -3100,7 +3100,7 @@ function openSlidePlugin(opts) {
+ 			if (id === resolved$1(CONFIG_VMOD)) {
+ 				const userBuild = config.build ?? {};
+ 				const buildResolved = isDev ? {
+-					showSlideBrowser: true,
++					showSlideBrowser: userBuild.showSlideBrowser ?? true,
+ 					showSlideUi: true,
+ 					allowHtmlDownload: true
+ 				} : {
+diff --git a/node_modules/@open-slide/core/src/app/components/command/command-menu.tsx b/node_modules/@open-slide/core/src/app/components/command/command-menu.tsx
+index 5a7509e..ec38d1d 100644
+--- a/node_modules/@open-slide/core/src/app/components/command/command-menu.tsx
++++ b/node_modules/@open-slide/core/src/app/components/command/command-menu.tsx
+@@ -205,8 +205,9 @@ function useSharedCommandGroups(): CommandGroupSpec[] {
+       })),
+     ];
+ 
++    // open-slide-starter: restarting from the UI is disabled (the sandbox owns the server).
+     const developer: CommandSpec[] =
+-      import.meta.env.DEV && canRestart
++      false && canRestart
+         ? [
+             {
+               id: 'restart-dev-server',
+diff --git a/node_modules/@open-slide/core/src/app/routes/slide.tsx b/node_modules/@open-slide/core/src/app/routes/slide.tsx
+index 009bde3..3552dc0 100644
+--- a/node_modules/@open-slide/core/src/app/routes/slide.tsx
++++ b/node_modules/@open-slide/core/src/app/routes/slide.tsx
+@@ -125,7 +125,8 @@ export function Slide() {
+   const [linkCopied, setLinkCopied] = useState(false);
+   const linkCopiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+   const [designOpen, setDesignOpen] = useState(false);
+-  const [overviewOpen, setOverviewOpen] = useState(false);
++  // open-slide-starter: `?overview` opens the page grid on load (style previews).
++  const [overviewOpen, setOverviewOpen] = useState(() => searchParams.has('overview'));
+   const [commandOpen, setCommandOpen] = useState(false);
+   const [, setWarmedTick] = useState(0);
+   const handleAssetsWarmed = useCallback(() => {
+@@ -653,7 +654,6 @@ export function Slide() {
+                   </TabsList>
+                 </Tabs>
+               )}
+-              {import.meta.env.DEV && <AgentConnectedBadge />}
+             </div>
+ 
+             {/* On md+ the title centers to the viewport via absolute positioning. On mobile the
