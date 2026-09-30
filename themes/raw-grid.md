@@ -122,7 +122,7 @@ const Cover: Page = () => (
 ```tsx
 // Oversized numeral at low opacity, wallpaper behind content — the "decorative numeral" pattern.
 const WallpaperNumeral = ({ children }: { children: React.ReactNode }) => (
-  <div aria-hidden style={{ position: 'absolute', top: -20, right: 48, fontSize: 320, fontWeight: 900, lineHeight: 1, letterSpacing: '-0.04em', color: '#0A0A0A', opacity: 0.08 }}>{children}</div>
+  <div aria-hidden data-bleed style={{ position: 'absolute', top: -20, right: 48, fontSize: 320, fontWeight: 900, lineHeight: 1, letterSpacing: '-0.04em', color: '#0A0A0A', opacity: 0.08 }}>{children}</div>
 );
 
 // Hard offset shadow — solid black, zero blur, the system's only two depth values.
