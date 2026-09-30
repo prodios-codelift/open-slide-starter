@@ -43,7 +43,7 @@ index 3fba1c9..d7af2b2 100644
            >
              {pages.map((PageComp, i) => {
 diff --git a/node_modules/@open-slide/core/src/app/routes/slide.tsx b/node_modules/@open-slide/core/src/app/routes/slide.tsx
-index 009bde3..828c049 100644
+index 009bde3..24da4a1 100644
 --- a/node_modules/@open-slide/core/src/app/routes/slide.tsx
 +++ b/node_modules/@open-slide/core/src/app/routes/slide.tsx
 @@ -125,7 +125,8 @@ export function Slide() {
@@ -87,3 +87,27 @@ index 009bde3..828c049 100644
                <div className="pointer-events-auto min-w-0 max-w-[34rem]">
                  <InlineTitleEditor title={title} onSubmit={(next) => renameSlide(slideId, next)} />
                </div>
+@@ -815,7 +819,13 @@ export function Slide() {
+           ) : (
+             <DesignProvider slideId={slideId}>
+               <div className="relative flex min-h-0 flex-1 flex-col">
+-                <div className="flex min-h-0 flex-1 flex-col md:flex-row">
++                {/* open-slide-starter: the rail (user-resizable up to 480px) and the Format/Design
++                    sidebar (fixed 320px) are both shrink-0, and the canvas had no floor — on a
++                    narrow-but-still-md+ window with a wide rail and a panel open, the canvas (the
++                    only flexible child) was crushed to 0 width instead of the layout adapting.
++                    A floor on the canvas plus horizontal scroll on this row means the layout
++                    degrades to "scroll sideways" rather than "canvas disappears". */}
++                <div className="flex min-h-0 flex-1 flex-col md:flex-row md:overflow-x-auto">
+                   <ResizableRail
+                     pages={pages}
+                     design={slide.design}
+@@ -830,7 +840,7 @@ export function Slide() {
+                     ref={slideViewportRef}
+                     data-inspector-root
+                     data-slide-id={slideId}
+-                    className="relative min-h-0 min-w-0 flex-1 bg-background p-2 md:mx-2 md:mb-2 md:rounded-[10px] md:p-10 md:shadow-edge md:ring-1 md:ring-foreground/[0.06]"
++                    className="relative min-h-0 min-w-0 flex-1 bg-background p-2 md:mx-2 md:mb-2 md:min-w-[480px] md:rounded-[10px] md:p-10 md:shadow-edge md:ring-1 md:ring-foreground/[0.06]"
+                   >
+                     <SlideViewportNavigation
+                       targetRef={slideViewportRef}
