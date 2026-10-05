@@ -111,3 +111,183 @@ index 009bde3..24da4a1 100644
                    >
                      <SlideViewportNavigation
                        targetRef={slideViewportRef}
+diff --git a/node_modules/@open-slide/core/src/app/styles.css b/node_modules/@open-slide/core/src/app/styles.css
+index 96d96a4..c2cd2d3 100644
+--- a/node_modules/@open-slide/core/src/app/styles.css
++++ b/node_modules/@open-slide/core/src/app/styles.css
+@@ -64,81 +64,78 @@
+   /* Runtime copy of the @theme token for inline style/JS consumers. */
+   --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+ 
+-  /* Pure neutral ramp — zero chroma, flat surfaces, hairline borders.
+-     Near-white background with white cards floating on a slightly
+-     recessed canvas. */
+-  --background: oklch(0.99 0 0);
++  /* open-slide-starter: matches Prodios Autopilot's own shell palette
++     (apps/client/src/index.css) so the sandboxed editor doesn't read as a
++     different product bolted onto the app. Pure neutral ramp, no brand hue. */
++  --background: oklch(1 0 0);
+   --foreground: oklch(0.145 0 0);
+-  --canvas: oklch(0.975 0 0);
++  --canvas: oklch(0.985 0 0);
+ 
+   --card: oklch(1 0 0);
+   --card-foreground: oklch(0.145 0 0);
+   --popover: oklch(1 0 0);
+   --popover-foreground: oklch(0.145 0 0);
+ 
+-  --primary: oklch(0.185 0 0);
++  --primary: oklch(0.205 0 0);
+   --primary-foreground: oklch(0.985 0 0);
+-  --secondary: oklch(0.96 0 0);
+-  --secondary-foreground: oklch(0.185 0 0);
+-  --muted: oklch(0.955 0 0);
+-  --muted-foreground: oklch(0.5 0 0);
+-  --accent: oklch(0.945 0 0);
+-  --accent-foreground: oklch(0.185 0 0);
+-  --destructive: oklch(0.58 0.22 27);
+-
+-  --border: oklch(0.92 0 0);
+-  --hairline: oklch(0.885 0 0);
+-  --input: oklch(0.92 0 0);
+-  --ring: oklch(0.6 0.2 25);
+-
+-  /* Vermillion — the single signature accent on an otherwise neutral
+-     surface; restraint is the point. */
+-  --brand: oklch(0.6 0.2 25);
++  --secondary: oklch(0.967 0.001 286.375);
++  --secondary-foreground: oklch(0.21 0.006 285.885);
++  --muted: oklch(0.97 0 0);
++  --muted-foreground: oklch(0.556 0 0);
++  --accent: oklch(0.97 0 0);
++  --accent-foreground: oklch(0.205 0 0);
++  --destructive: oklch(0.577 0.245 27.325);
++
++  --border: oklch(0.922 0 0);
++  --hairline: oklch(0.955 0 0);
++  --input: oklch(0.922 0 0);
++  --ring: oklch(0.708 0 0);
++
++  /* No signature accent in Prodios's own shell — the "brand" ramp is just
++     neutral ink, so comment markers/focus rings/selection read as part of
++     the app chrome instead of a different product's color. */
++  --brand: oklch(0.205 0 0);
+   --brand-foreground: oklch(0.985 0 0);
+-  --brand-soft: oklch(0.6 0.2 25 / 0.1);
++  --brand-soft: oklch(0.145 0 0 / 0.08);
+ 
+-  /* Tight, considered radius — drops the trendy 10px squish for 6px crisp. */
+-  --radius: 0.375rem;
++  /* Matches Prodios's sharp, zero-radius look. */
++  --radius: 0;
+ 
+-  /* Chrome ground — matches --canvas so sidebar, rails, and panels sit on
+-     one continuous surface; content floats above it as elevated cards. */
+-  --sidebar: oklch(0.975 0 0);
+-  --sidebar-foreground: oklch(0.185 0 0);
++  --sidebar: oklch(0.985 0 0);
++  --sidebar-foreground: oklch(0.145 0 0);
+ }
+ 
+ .dark {
+-  /* Lifted well above the near-black chrome ground (--sidebar 0.1) so the
+-     elevated content cards read at a glance on dim displays. */
+-  --background: oklch(0.175 0 0);
+-  --foreground: oklch(0.93 0 0);
+-  --canvas: oklch(0.1 0 0);
+-
+-  --card: oklch(0.19 0 0);
+-  --card-foreground: oklch(0.93 0 0);
+-  --popover: oklch(0.205 0 0);
+-  --popover-foreground: oklch(0.93 0 0);
+-
+-  --primary: oklch(0.925 0 0);
+-  --primary-foreground: oklch(0.17 0 0);
+-  --secondary: oklch(0.24 0 0);
+-  --secondary-foreground: oklch(0.93 0 0);
+-  --muted: oklch(0.23 0 0);
+-  --muted-foreground: oklch(0.68 0 0);
+-  --accent: oklch(0.265 0 0);
+-  --accent-foreground: oklch(0.93 0 0);
+-  --destructive: oklch(0.66 0.2 25);
+-
+-  --border: oklch(1 0 0 / 0.1);
+-  --hairline: oklch(1 0 0 / 0.07);
+-  --input: oklch(1 0 0 / 0.14);
+-  --ring: oklch(0.63 0.19 25);
+-
+-  --brand: oklch(0.63 0.2 25);
+-  --brand-foreground: oklch(0.985 0 0);
+-  --brand-soft: oklch(0.63 0.2 25 / 0.16);
++  --background: oklch(0.145 0 0);
++  --foreground: oklch(0.985 0 0);
++  --canvas: oklch(0.205 0 0);
+ 
+-  --sidebar: oklch(0.1 0 0);
+-  --sidebar-foreground: oklch(0.93 0 0);
++  --card: oklch(0.205 0 0);
++  --card-foreground: oklch(0.985 0 0);
++  --popover: oklch(0.205 0 0);
++  --popover-foreground: oklch(0.985 0 0);
++
++  --primary: oklch(0.922 0 0);
++  --primary-foreground: oklch(0.205 0 0);
++  --secondary: oklch(0.274 0.006 286.033);
++  --secondary-foreground: oklch(0.985 0 0);
++  --muted: oklch(0.269 0 0);
++  --muted-foreground: oklch(0.708 0 0);
++  --accent: oklch(0.269 0 0);
++  --accent-foreground: oklch(0.985 0 0);
++  --destructive: oklch(0.704 0.191 22.216);
++
++  --border: oklch(1 0 0 / 10%);
++  --hairline: oklch(1 0 0 / 7%);
++  --input: oklch(1 0 0 / 15%);
++  --ring: oklch(0.556 0 0);
++
++  --brand: oklch(0.922 0 0);
++  --brand-foreground: oklch(0.205 0 0);
++  --brand-soft: oklch(1 0 0 / 0.08);
++
++  --sidebar: oklch(0.205 0 0);
++  --sidebar-foreground: oklch(0.985 0 0);
+ }
+ 
+ /* Tabular numerics — pages, counts, hex values, slider readouts.
+@@ -222,9 +219,9 @@
+ }
+ 
+ /*
+- * Comment input cue — kept from the original design but retoned to match
+- * the new palette (warm vermillion + amber instead of the AI-classic
+- * blue/violet halo). Plays once on first open, then settles.
++ * Comment input cue — kept from the original design but retoned to neutral
++ * ink (open-slide-starter: no brand hue in this shell, see --brand above).
++ * Plays once on first open, then settles.
+  */
+ @property --comment-cue-angle {
+   syntax: "<angle>";
+@@ -247,9 +244,9 @@
+     from var(--comment-cue-angle),
+     transparent 0deg,
+     transparent 250deg,
+-    oklch(0.78 0.14 60 / 0.55) 295deg,
+-    oklch(0.62 0.2 28 / 0.85) 325deg,
+-    oklch(0.78 0.14 60 / 0.55) 350deg,
++    oklch(0.6 0 0 / 0.55) 295deg,
++    oklch(0.3 0 0 / 0.85) 325deg,
++    oklch(0.6 0 0 / 0.55) 350deg,
+     transparent 360deg
+   );
+   -webkit-mask:
+@@ -272,8 +269,8 @@
+   inset: -10px;
+   border-radius: calc(var(--radius-md) + 10px);
+   background:
+-    radial-gradient(80% 60% at 30% 50%, oklch(0.62 0.2 28 / 0.18), transparent 70%),
+-    radial-gradient(70% 60% at 75% 60%, oklch(0.78 0.14 60 / 0.16), transparent 70%);
++    radial-gradient(80% 60% at 30% 50%, oklch(0.3 0 0 / 0.18), transparent 70%),
++    radial-gradient(70% 60% at 75% 60%, oklch(0.6 0 0 / 0.16), transparent 70%);
+   filter: blur(14px);
+   opacity: 0;
+   z-index: -1;
