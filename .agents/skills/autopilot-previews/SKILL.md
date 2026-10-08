@@ -5,7 +5,7 @@ description: Style previews for Prodios Autopilot. Use when the prompt says to m
 
 # Style previews (Autopilot)
 
-Three cover pages in three looks, so the user can pick the deck's style before the deck is built. Copy palette, fonts, and the Title, Eyebrow, and Footer components from the three theme files. Do not open `slide-authoring`, `node_modules`, or the framework. Load a webfont only from `.agents/skills/slide-authoring/references/webfonts.md`.
+Three cover pages in three looks, so the user can pick the deck's style before the deck is built. Copy palette, the webfont stylesheet URL, and the Title, Eyebrow, and Footer components from the three theme files. Do not open `slide-authoring` or `node_modules`. End with the summary table. Do not build the deck.
 
 ## Input (from the prompt)
 
@@ -33,7 +33,7 @@ A custom palette, fonts, and signature element fill a slot only when no unused t
 Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write only `slides/previews/index.tsx`. Do not write `slides/deck`. One slide, three pages, in order A, B, C:
 
 - Each page is the deck's real cover: the brief's title, a subtitle from the occasion or audience, and an eyebrow such as the date or team. Only real deck content.
-- Each page uses its theme's palette and fonts (load webfonts only from `.agents/skills/slide-authoring/references/webfonts.md`) and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
+- Each page uses its theme's palette, webfont stylesheet URL, and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
 - Don't declare a `design` const — three looks can't share one. Use plain consts per page.
 - `meta`: `{ title: 'Style previews', createdAt: '<ISO timestamp>' }`. No `meta.theme`. Set `createdAt` with `node -e "console.log(new Date().toISOString())"`.
 - Motion: static → none; subtle → one entrance fade on the title; rich → a short staggered entrance.

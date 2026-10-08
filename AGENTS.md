@@ -23,13 +23,13 @@ Keep this file short: hard rules only. All deeper guidance lives in the skills a
 
 ## Prodios Autopilot
 
-When this workspace runs inside Prodios Autopilot, a builder agent works here while the user watches the deck in a panel. These rules add to the hard rules above.
+When this workspace runs inside Prodios Autopilot, a builder agent works here while the user watches the deck in a panel. The hard rules above still apply. The "Which skill to use" list does not: it sends this session into `create-slide`, `slide-authoring`, and `current-slide`. Follow only the list below.
 
 - **The user isn't in this session.** Use the answers in your prompt. If something important is still unclear, ask with the `ask_questions` tool — only what the prompt doesn't answer, all questions in one call, then stop; the answers arrive as your next message. Wherever a skill says `AskUserQuestion`, use `ask_questions` the same way. After answers arrive, re-read any file before editing it: the user may have edited the deck meanwhile.
 - **Fixed ids.** The deck is `slides/deck/index.tsx` — never another id. Style previews are `slides/previews/index.tsx`: one slide, three pages, A = page 1, B = page 2, C = page 3.
 - **Which skill:**
   - Style previews → `autopilot-previews`.
-  - A new deck → Write slides/deck/index.tsx from the theme file named in the prompt. Do not open create-slide. Its questions are already answered. The slide id is `deck`. Open `slide-authoring` only after `scripts/check-slides.sh` fails and the fix needs a primitive documented there.
+  - A new deck → Write slides/deck/index.tsx from the theme file named in the prompt. Do not open create-slide or slide-authoring. Its questions are already answered. The slide id is `deck`. `export const design` must be `{ palette: { bg, text, accent }, fonts: { display, body }, typeScale: { hero, body }, radius }`. A flat design object crashes the canvas and the deck is blank. Every edit includes `path`. A rejected edit did not change the file.
   - Changes to the deck → `slide-authoring`. Comments left with the inspector → `apply-comments` on `slides/deck`.
 - **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder). `themes/index.json` is the picker catalog. Regenerate it with `npm run check-themes` when a theme file changes.
 - **Before you finish:**
