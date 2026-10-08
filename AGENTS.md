@@ -34,6 +34,9 @@ When this workspace runs inside Prodios Autopilot, a builder agent works here wh
 - **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder). `themes/index.json` is the picker catalog. Regenerate it with `npm run check-themes` when a theme file changes.
 - **Before you finish:**
   - Run `scripts/check-slides.sh <id>` (`previews` or `deck`). Review that run's screenshots in one message.
-  - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time.
+  - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until `slides/<id>/index.tsx` has changed.
+  - `no-deck` means that file is not rendering. Read it and the dev-server log, then fix the file. Do not read `node_modules`, `open-slide.config.ts`, or framework source, and do not search for `data-osd-canvas`.
+  - A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
+  - Style previews write only `slides/previews/index.tsx`. Do not create `slides/deck` in that mode.
   - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.
 - The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.

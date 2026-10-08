@@ -5,7 +5,7 @@ description: Style previews for Prodios Autopilot. Use when the prompt says to m
 
 # Style previews (Autopilot)
 
-Three cover pages in three looks, so the user can pick the deck's style before the deck is built. For everything about writing pages (canvas, type scale, fonts, assets), follow the `slide-authoring` skill.
+Three cover pages in three looks, so the user can pick the deck's style before the deck is built. Copy palette, fonts, and the Title, Eyebrow, and Footer components from the three theme files. Do not open `slide-authoring`, `node_modules`, or the framework. Load a webfont only from `.agents/skills/slide-authoring/references/webfonts.md`.
 
 ## Input (from the prompt)
 
@@ -30,18 +30,20 @@ A custom palette, fonts, and signature element fill a slot only when no unused t
 
 ## 3. Write `slides/previews/index.tsx`
 
-Read the full file of each picked theme in one turn. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write one slide with three pages, in order A, B, C:
+Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write only `slides/previews/index.tsx`. Do not write `slides/deck`. One slide, three pages, in order A, B, C:
 
 - Each page is the deck's real cover: the brief's title, a subtitle from the occasion or audience, and an eyebrow such as the date or team. Only real deck content.
-- Each page uses its theme's palette and fonts (load webfonts per `references/webfonts.md` in `slide-authoring`) and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
+- Each page uses its theme's palette and fonts (load webfonts only from `.agents/skills/slide-authoring/references/webfonts.md`) and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
 - Don't declare a `design` const — three looks can't share one. Use plain consts per page.
-- `meta`: `{ title: 'Style previews', createdAt: '<now>' }` (createdAt rules in `slide-authoring`). No `meta.theme`.
+- `meta`: `{ title: 'Style previews', createdAt: '<ISO timestamp>' }`. No `meta.theme`. Set `createdAt` with `node -e "console.log(new Date().toISOString())"`.
 - Motion: static → none; subtle → one entrance fade on the title; rich → a short staggered entrance.
 - Never put theme names, directions, "Option A", "preview" or similar on the canvas.
 
 ## 4. Check
 
-Run `scripts/check-slides.sh previews`. Review that run's screenshots in one message. When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Name any issues that remain.
+Run `scripts/check-slides.sh previews` once. Review that run's screenshots in one message. When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit of `slides/previews/index.tsx`, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until that file has changed. Name any issues that remain.
+
+`no-deck` on page 1 means this file is not rendering. There are no screenshots. Read `slides/previews/index.tsx` and the dev-server log, then do the one edit above. Do not curl the page, do not grep `@open-slide`, and do not read `node_modules`. A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
 
 ## 5. Summary
 
