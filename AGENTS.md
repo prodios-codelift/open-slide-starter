@@ -35,7 +35,7 @@ When this workspace runs inside Prodios Autopilot, a builder agent works here wh
 - **Before you finish:**
   - Run `scripts/check-slides.sh <id>` (`previews` or `deck`). Review that run's screenshots in one message.
   - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until `slides/<id>/index.tsx` has changed.
-  - `no-deck` means that file is not rendering. Read it and the dev-server log, then fix the file. Do not read `node_modules`, `open-slide.config.ts`, or framework source, and do not search for `data-osd-canvas`.
+  - `no-deck` with `typecheck: pass` usually means the check's browser did not see the canvas, not that the file is broken. Confirm `slides/<id>/index.tsx` has `export default` pages and `export const meta`. If it does, do not edit the file, and do not run the script again. Do not read `node_modules`, `open-slide.config.ts`, framework source or the dev-server log. Finish and say the pages were not visually checked.
   - A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
   - Style previews write only `slides/previews/index.tsx`. Do not create `slides/deck` in that mode.
   - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.

@@ -43,7 +43,7 @@ Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. A
 
 Run `scripts/check-slides.sh previews` once. Review that run's screenshots in one message. When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit of `slides/previews/index.tsx`, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until that file has changed. Name any issues that remain.
 
-`no-deck` on page 1 means this file is not rendering. There are no screenshots. Read `slides/previews/index.tsx` and the dev-server log, then do the one edit above. Do not curl the page, do not grep `@open-slide`, and do not read `node_modules`. A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
+`no-deck` with `typecheck: pass` usually means the check's browser did not see the canvas, not that the file is broken. There are no screenshots. Confirm `slides/previews/index.tsx` has `export default` pages and `export const meta`. If it does, do not edit the file, do not run the script again, do not curl the page, do not grep `@open-slide`, and do not read `node_modules` or the dev-server log. Finish with the summary table and say the pages were not visually checked. A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
 
 ## 5. Summary
 
