@@ -29,11 +29,11 @@ When this workspace runs inside Prodios Autopilot, a builder agent works here wh
 - **Fixed ids.** The deck is `slides/deck/index.tsx` — never another id. Style previews are `slides/previews/index.tsx`: one slide, three pages, A = page 1, B = page 2, C = page 3.
 - **Which skill:**
   - Style previews → `autopilot-previews`.
-  - A new deck → `create-slide`. Its questions are answered in your prompt (theme, density, motion; the outline sets the page count), so don't ask them again. The slide id is `deck`. Skip its hand-off step and end with a short summary instead.
+  - A new deck → Write slides/deck/index.tsx from the theme file named in the prompt. Do not open create-slide. Its questions are already answered. The slide id is `deck`. Open `slide-authoring` only after `scripts/check-slides.sh` fails and the fix needs a primitive documented there.
   - Changes to the deck → `slide-authoring`. Comments left with the inspector → `apply-comments` on `slides/deck`.
-- **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder).
+- **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder). `themes/index.json` is the picker catalog. Regenerate it with `npm run check-themes` when a theme file changes.
 - **Before you finish:**
-  - `npm run typecheck` passes.
-  - For every page: `agent-browser open "http://localhost:3000/s/<id>?p=<n>"`, then `agent-browser eval "$(cat scripts/verify-slides.js)"` returns no issues. Take a screenshot and look at it (see `.agents/skills/agent-browser/SKILL.md`).
-  - If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix the cause.
+  - Run `scripts/check-slides.sh <id>` (`previews` or `deck`). Review that run's screenshots in one message.
+  - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time.
+  - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.
 - The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.

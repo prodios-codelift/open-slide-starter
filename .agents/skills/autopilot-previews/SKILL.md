@@ -16,19 +16,21 @@ Three cover pages in three looks, so the user can pick the deck's style before t
 
 ## 1. Shortlist themes
 
-Read only the frontmatter of every `themes/*.md`. A theme fits when its `mood`, `tone`, `formality` and `density` suit the brief, `best_for` is a reasonable match, and nothing in `avoid_for` applies. Leave out every id listed in **Exclude styles**.
+Read `themes/index.json`. Do not open `themes/*.md` while shortlisting. A theme fits when its `mood`, `tone`, `formality` and `density` suit the brief, `best_for` is a reasonable match, and nothing in `avoid_for` applies. Leave out every id listed in **Exclude styles**.
 
 ## 2. Pick three directions
 
+Unused themes fill slots in order A, then B, then C.
+
 - **A — Expected:** the safest strong fit for this audience and occasion.
 - **B — Elevated:** a more distinctive fit that still suits the occasion.
-- **C — Memorable:** the boldest option that still serves the brief. Use a theme when one fits; otherwise design a custom look (palette, display and body fonts, one signature element).
+- **C — Memorable:** the boldest remaining fit.
 
-Fit first. Then check difference: any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next-best candidate. When the brief clearly calls for a dark or formal deck, all three may be dark or formal as long as palettes and type differ.
+A custom palette, fonts, and signature element fill a slot only when no unused theme remains for that slot. Fit first. When the brief clearly calls for a dark or formal deck, all three may be dark or formal as long as palettes and type differ.
 
 ## 3. Write `slides/previews/index.tsx`
 
-Read the full file of each picked theme. Write one slide with three pages, in order A, B, C:
+Read the full file of each picked theme in one turn. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write one slide with three pages, in order A, B, C:
 
 - Each page is the deck's real cover: the brief's title, a subtitle from the occasion or audience, and an eyebrow such as the date or team. Only real deck content.
 - Each page uses its theme's palette and fonts (load webfonts per `references/webfonts.md` in `slide-authoring`) and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
@@ -39,7 +41,7 @@ Read the full file of each picked theme. Write one slide with three pages, in or
 
 ## 4. Check
 
-Run `npm run typecheck`. For `?p=1`, `?p=2` and `?p=3`: open `http://localhost:3000/s/previews?p=<n>`, run `scripts/verify-slides.js`, take a screenshot and look at it. Fix and repeat until every page is clean.
+Run `scripts/check-slides.sh previews`. Review that run's screenshots in one message. When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Name any issues that remain.
 
 ## 5. Summary
 

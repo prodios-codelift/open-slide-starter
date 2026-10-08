@@ -1,8 +1,9 @@
 // Checks every themes/*.md: single-line frontmatter with our selection keys,
 // create-theme's sections plus ours, and a size limit. Exits 1 on any problem.
+// When every theme is valid, writes themes/index.json for the preview picker.
 //
 //   npm run check-themes
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const THEMES_DIR = path.resolve('themes');
@@ -63,6 +64,33 @@ function problemsFor(file, raw) {
   return problems;
 }
 
+const INDEX_KEYS = [
+  'name', 'description', 'mode', 'mood', 'tone', 'formality',
+  'density', 'scheme', 'best_for', 'avoid_for',
+];
+
+function asList(value) {
+  return value
+    .slice(1, -1)
+    .split(',')
+    .map((part) => part.trim().replace(/^["']|["']$/g, ''))
+    .filter(Boolean);
+}
+
+async function writeIndex(files) {
+  const items = [];
+  for (const name of files) {
+    const { data } = parseFrontmatter(await readFile(path.join(THEMES_DIR, name), 'utf8'));
+    const item = { id: name.slice(0, -3) };
+    for (const key of INDEX_KEYS) {
+      item[key] = key === 'mood' || key === 'tone' ? asList(data[key]) : data[key];
+    }
+    items.push(item);
+  }
+  items.sort((a, b) => a.id.localeCompare(b.id));
+  await writeFile(path.join(THEMES_DIR, 'index.json'), `${JSON.stringify(items, null, 2)}\n`);
+}
+
 const files = (await readdir(THEMES_DIR)).filter((name) => name.endsWith('.md'));
 let failed = 0;
 for (const name of files) {
@@ -73,4 +101,5 @@ for (const name of files) {
   }
 }
 console.log(`${files.length - failed}/${files.length} themes valid`);
+if (failed === 0) await writeIndex(files);
 process.exit(failed ? 1 : 0);
