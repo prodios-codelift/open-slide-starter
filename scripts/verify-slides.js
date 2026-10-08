@@ -46,7 +46,7 @@
   };
   const errorOverlay = () => document.querySelector('vite-error-overlay');
 
-  for (let waited = 0; waited < 5000 && !mainCanvas() && !errorOverlay(); waited += 100) {
+  for (let waited = 0; waited < 12000 && !mainCanvas() && !errorOverlay(); waited += 100) {
     await sleep(100);
   }
 

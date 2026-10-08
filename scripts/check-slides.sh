@@ -32,30 +32,48 @@ read_total() {
   ' "$current" "$id"
 }
 
+# Pages after the first switch inside the running app: a full load of the dev server's
+# unbundled modules takes several seconds, so only page 1 pays for it. The retry reloads.
+goto_page() {
+  if [[ $1 -gt 1 && $2 -eq 1 ]]; then
+    agent-browser eval "history.pushState(null, '', '/s/${id}?p=$1'); dispatchEvent(new PopStateEvent('popstate')); 0" >/dev/null &&
+      agent-browser wait 300 >/dev/null
+  else
+    agent-browser open "http://localhost:3000/s/${id}?p=$1"
+  fi
+}
+
+# A freshly launched browser keeps its first real open on about:blank, so launch it here.
+agent-browser open about:blank || exit $?
+
 page=1
 total=1
 total_pages=null
 truncated=false
 while [[ $page -le $total ]]; do
-  agent-browser open "http://localhost:3000/s/${id}?p=${page}" || exit $?
-  raw=$(agent-browser eval "$(cat scripts/verify-slides.js)") || exit $?
-  printf '%s' "$raw" > "$work/raw.txt"
-  node --input-type=module -e '
-    import { readFileSync, writeFileSync } from "node:fs"
-    const raw = readFileSync(process.argv[1], "utf8")
-    const start = raw.indexOf("{")
-    const end = raw.lastIndexOf("}")
-    if (start === -1 || end < start) {
-      console.error("verify-slides returned no JSON")
-      process.exit(2)
-    }
-    const data = JSON.parse(raw.slice(start, end + 1))
-    const issues = Array.isArray(data.issues) ? data.issues : []
-    const noDeck = issues.some((issue) => issue.type === "no-deck")
-    writeFileSync(process.argv[2], JSON.stringify({ noDeck, page: String(data.page ?? process.argv[3]), issues }))
-    process.exit(noDeck ? 0 : 10)
-  ' "$work/raw.txt" "$work/parsed.json" "$page"
-  status=$?
+  # no-deck can be a page that is slow to mount, so look twice before trusting it.
+  for attempt in 1 2; do
+    goto_page "$page" "$attempt" || exit $?
+    raw=$(agent-browser eval "$(cat scripts/verify-slides.js)") || exit $?
+    printf '%s' "$raw" > "$work/raw.txt"
+    node --input-type=module -e '
+      import { readFileSync, writeFileSync } from "node:fs"
+      const raw = readFileSync(process.argv[1], "utf8")
+      const start = raw.indexOf("{")
+      const end = raw.lastIndexOf("}")
+      if (start === -1 || end < start) {
+        console.error("verify-slides returned no JSON")
+        process.exit(2)
+      }
+      const data = JSON.parse(raw.slice(start, end + 1))
+      const issues = Array.isArray(data.issues) ? data.issues : []
+      const noDeck = issues.some((issue) => issue.type === "no-deck")
+      writeFileSync(process.argv[2], JSON.stringify({ noDeck, page: String(data.page ?? process.argv[3]), issues }))
+      process.exit(noDeck ? 0 : 10)
+    ' "$work/raw.txt" "$work/parsed.json" "$page"
+    status=$?
+    if [[ $status -ne 0 ]]; then break; fi
+  done
   if [[ $status -eq 2 ]]; then exit 2; fi
   if [[ $status -eq 0 ]]; then
     if [[ $page -eq 1 ]]; then

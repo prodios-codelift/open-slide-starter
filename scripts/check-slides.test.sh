@@ -43,6 +43,7 @@ EOF
   cat > "$state/bin/agent-browser" << EOF
 #!/usr/bin/env bash
 if [[ \$1 == open ]]; then
+  [[ \$2 == about:blank ]] && exit 0
   page=\${2##*p=}
   echo "\$page" >> "$state/opens"
   echo "\$page" > "$state/current"
@@ -57,6 +58,18 @@ if [[ \$1 == screenshot ]]; then
   echo "\${@: -1}" >> "$state/shots.log"
   exit 0
 fi
+if [[ \$1 == eval && \$2 == *pushState* ]]; then
+  page=\$(echo "\$2" | sed -E "s/.*p=([0-9]+).*/\\1/")
+  echo "\$page" >> "$state/opens"
+  echo "\$page" > "$state/current"
+  total=\$(cat "$state/total" 2>/dev/null || echo 1)
+  if [[ \$total != none ]] && ! grep -q no-deck "$state/page-\$page.json" 2>/dev/null; then
+    idx=\$(( page > total ? total : page ))
+    printf '{"slideId":"deck","pageIndex":%s,"totalPages":%s}' \$((idx - 1)) "\$total" > "$state/current.json"
+  fi
+  exit 0
+fi
+if [[ \$1 == wait ]]; then exit 0; fi
 if [[ \$1 == eval ]]; then
   page=\$(cat "$state/current")
   total=\$(cat "$state/total" 2>/dev/null || echo 1)
@@ -115,7 +128,7 @@ run_case "deck ends" pass "$tmpdir/end" 0 3 3 3 3 false
 # page 1 missing is a failure and takes no screenshot
 mkdir -p "$tmpdir/missing"
 node_deck 1 > "$tmpdir/missing/page-1.json"
-run_case "missing deck" pass "$tmpdir/missing" 1 1 0 1 null false
+run_case "missing deck" pass "$tmpdir/missing" 1 1 0 2 null false
 
 # an issue fails the run
 mkdir -p "$tmpdir/bad"
