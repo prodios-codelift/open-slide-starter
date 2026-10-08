@@ -3,12 +3,17 @@
 #   scripts/check-slides.sh <slide-id>
 set -u
 
+# Walks ?p=1..N. The app clamps ?p= past the last page, so N comes from the
+# totalPages the dev server records in current.json, not from the page itself.
 id="${1:?usage: scripts/check-slides.sh <slide-id>}"
 cd "$(dirname "$0")/.."
 
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 typecheck_log="$work/typecheck.txt"
+current="${OPEN_SLIDE_CURRENT:-node_modules/.open-slide/current.json}"
+limit=40
+rm -f /tmp/slides-"${id}"-*.png
 
 if npm run typecheck >"$typecheck_log" 2>&1; then
   typecheck=pass
@@ -16,8 +21,22 @@ else
   typecheck=fail
 fi
 
+# totalPages of this slide as the dev server last recorded it, once page 1 mounted.
+read_total() {
+  node --input-type=module -e '
+    import { readFileSync } from "node:fs"
+    try {
+      const data = JSON.parse(readFileSync(process.argv[1], "utf8"))
+      if (data.slideId === process.argv[2] && data.pageIndex === 0 && data.totalPages > 0) console.log(data.totalPages)
+    } catch {}
+  ' "$current" "$id"
+}
+
 page=1
-while [[ $page -le 40 ]]; do
+total=1
+total_pages=null
+truncated=false
+while [[ $page -le $total ]]; do
   agent-browser open "http://localhost:3000/s/${id}?p=${page}" || exit $?
   raw=$(agent-browser eval "$(cat scripts/verify-slides.js)") || exit $?
   printf '%s' "$raw" > "$work/raw.txt"
@@ -47,6 +66,21 @@ while [[ $page -le 40 ]]; do
   if [[ $status -ne 10 ]]; then exit "$status"; fi
   agent-browser screenshot "/tmp/slides-${id}-${page}.png" || exit $?
   mv "$work/parsed.json" "$work/keep-$page.json"
+  if [[ $page -eq 1 ]]; then
+    for _ in 1 2 3 4 5 6 7 8 9 10; do
+      found=$(read_total)
+      [[ -n $found ]] && break
+      sleep 0.3
+    done
+    if [[ -n ${found:-} ]]; then
+      total_pages=$found
+      total=$found
+      if [[ $total -gt $limit ]]; then
+        total=$limit
+        truncated=true
+      fi
+    fi
+  fi
   page=$((page + 1))
 done
 
@@ -55,16 +89,18 @@ node --input-type=module -e '
   const work = process.argv[1]
   const typecheck = process.argv[2]
   const slideId = process.argv[3]
-  const typecheckOutput = typecheck === "fail" ? readFileSync(process.argv[4], "utf8").trim() : ""
+  const totalPages = JSON.parse(process.argv[5])
+  const truncated = process.argv[6] === "true"
+  const typecheckOutput = typecheck === "fail" ? readFileSync(process.argv[4], "utf8").trim().slice(0, 2000) : ""
   const pages = readdirSync(work)
     .filter((name) => name.startsWith("keep-"))
-    .sort((a, b) => Number(a.slice(5)) - Number(b.slice(5)))
+    .sort((a, b) => Number(a.replace(/\D/g, "")) - Number(b.replace(/\D/g, "")))
     .map((name) => {
       const data = JSON.parse(readFileSync(`${work}/${name}`, "utf8"))
       return { page: String(data.page), issues: data.issues }
     })
-  const summary = { slideId, typecheck, typecheckOutput, pages }
+  const summary = { slideId, typecheck, typecheckOutput, totalPages, truncated, pages }
   process.stdout.write(JSON.stringify(summary))
   const failed = typecheck === "fail" || pages.some((item) => item.issues.length > 0)
   process.exit(failed ? 1 : 0)
-' "$work" "$typecheck" "$id" "$typecheck_log"
+' "$work" "$typecheck" "$id" "$typecheck_log" "$total_pages" "$truncated"
