@@ -85,6 +85,21 @@
     };
   }
 
+  // The app's chrome keeps resizing the canvas for a moment after it first paints, so
+  // measure only once the canvas rect has held still for a few frames.
+  const rectKey = () => {
+    const rect = mainCanvas()?.getBoundingClientRect();
+    return rect && [rect.x, rect.y, rect.width, rect.height].map(Math.round).join();
+  };
+  let still = 0;
+  let lastKey = rectKey();
+  for (let waited = 0; still < 5 && waited < 3000; waited += 50) {
+    await sleep(50);
+    const key = rectKey();
+    still = key === lastKey ? still + 1 : 0;
+    lastKey = key;
+  }
+
   // Reveal every <Step> and stop transitions so layout is final while measuring.
   const override = document.createElement('style');
   override.textContent = `
@@ -101,8 +116,6 @@
     }
   }
 
-  const bounds = canvas.getBoundingClientRect();
-  const scale = bounds.width / CANVAS_WIDTH;
   const issues = [];
 
   // Ancestors of [data-bleed] content (including the framework's own per-page host
@@ -135,6 +148,10 @@
     el.style.display = savedDisplay[i];
   });
   await nextFrame();
+
+  // Read late, right before the pass that compares against it.
+  const bounds = canvas.getBoundingClientRect();
+  const scale = bounds.width / CANVAS_WIDTH;
 
   for (const el of canvas.querySelectorAll('*')) {
     if (el.closest('[data-verify-ignore]') || !isRendered(el)) continue;
