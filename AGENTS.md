@@ -23,17 +23,20 @@ Keep this file short: hard rules only. All deeper guidance lives in the skills a
 
 ## Prodios Autopilot
 
-When this workspace runs inside Prodios Autopilot, a builder agent works here while the user watches the deck in a panel. These rules add to the hard rules above.
+When this workspace runs inside Prodios Autopilot, a builder agent works here while the user watches the deck in a panel. The hard rules above still apply. The "Which skill to use" list does not: it sends this session into `create-slide`, `slide-authoring`, and `current-slide`. Follow only the list below.
 
 - **The user isn't in this session.** Use the answers in your prompt. If something important is still unclear, ask with the `ask_questions` tool — only what the prompt doesn't answer, all questions in one call, then stop; the answers arrive as your next message. Wherever a skill says `AskUserQuestion`, use `ask_questions` the same way. After answers arrive, re-read any file before editing it: the user may have edited the deck meanwhile.
 - **Fixed ids.** The deck is `slides/deck/index.tsx` — never another id. Style previews are `slides/previews/index.tsx`: one slide, three pages, A = page 1, B = page 2, C = page 3.
 - **Which skill:**
   - Style previews → `autopilot-previews`.
-  - A new deck → `create-slide`. Its questions are answered in your prompt (theme, density, motion; the outline sets the page count), so don't ask them again. The slide id is `deck`. Skip its hand-off step and end with a short summary instead.
+  - A new deck → Write slides/deck/index.tsx from the theme file named in the prompt. Do not open create-slide or slide-authoring. Its questions are already answered. The slide id is `deck`. `export const design` must be `{ palette: { bg, text, accent }, fonts: { display, body }, typeScale: { hero, body }, radius }`. A flat design object crashes the canvas and the deck is blank. Load the theme's webfont stylesheet once at module top level, never inside a page component: create or update one `<link rel="stylesheet" id="osd-webfont-deck">` in `document.head` (`typeof document !== 'undefined'` guard) and set its `href`. A `<link>` or `@import` rendered inside a page registers the fonts again for every page. Every edit includes `path`. A rejected edit did not change the file.
   - Changes to the deck → `slide-authoring`. Comments left with the inspector → `apply-comments` on `slides/deck`.
-- **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder).
+- **Themes** live in `themes/*.md` (one theme per file, nothing else in that folder). `themes/index.json` is the picker catalog. Regenerate it with `npm run check-themes` when a theme file changes.
 - **Before you finish:**
-  - `npm run typecheck` passes.
-  - For every page: `agent-browser open "http://localhost:3000/s/<id>?p=<n>"`, then `agent-browser eval "$(cat scripts/verify-slides.js)"` returns no issues. Take a screenshot and look at it (see `.agents/skills/agent-browser/SKILL.md`).
-  - If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix the cause.
+  - Run `scripts/check-slides.sh <id>` (`previews` or `deck`). Review that run's screenshots in one message.
+  - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until `slides/<id>/index.tsx` has changed.
+  - `no-deck` with `typecheck: pass` has already been retried by the script, and usually means the check's browser did not see the canvas, not that the file is broken. Confirm `slides/<id>/index.tsx` has `export default` pages and `export const meta`. If it does, do not edit the file, and do not run the script again. Do not read `node_modules`, `open-slide.config.ts`, framework source or the dev-server log. Finish and say the pages were not visually checked.
+  - A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
+  - Style previews write only `slides/previews/index.tsx`. Do not create `slides/deck` in that mode.
+  - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.
 - The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.

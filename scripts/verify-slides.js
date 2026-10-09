@@ -46,7 +46,7 @@
   };
   const errorOverlay = () => document.querySelector('vite-error-overlay');
 
-  for (let waited = 0; waited < 5000 && !mainCanvas() && !errorOverlay(); waited += 100) {
+  for (let waited = 0; waited < 12000 && !mainCanvas() && !errorOverlay(); waited += 100) {
     await sleep(100);
   }
 
@@ -65,7 +65,22 @@
     return {
       page,
       issues: [
-        { type: 'no-deck', element: '', detail: 'no slide canvas on this page (wrong id, or the slide exports no pages)' },
+        {
+          type: 'no-deck',
+          element: '',
+          detail:
+            'no slide canvas on this page (wrong id, or the slide exports no pages). ' +
+            JSON.stringify({
+              url: location.href,
+              ready: document.readyState,
+              viewport: [innerWidth, innerHeight],
+              canvases: [...document.querySelectorAll('[data-osd-canvas]')].map((el) => {
+                const rect = el.getBoundingClientRect();
+                return [Math.round(rect.width), Math.round(rect.height)];
+              }),
+              text: (document.body.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 200),
+            }),
+        },
       ],
     };
   }

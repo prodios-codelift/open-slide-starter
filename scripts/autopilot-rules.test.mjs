@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import test from 'node:test'
+
+const previews = readFileSync('.agents/skills/autopilot-previews/SKILL.md', 'utf8')
+const agents = readFileSync('AGENTS.md', 'utf8')
+
+test('previews read the theme index and check once', () => {
+  assert.match(previews, /themes\/index\.json/)
+  assert.doesNotMatch(previews, /Read only the frontmatter of every/)
+  assert.match(previews, /scripts\/check-slides\.sh previews/)
+  assert.match(previews, /Do not run the script a third time/)
+  assert.match(
+    previews,
+    /custom palette, fonts, and signature element fill a slot only when no unused theme remains/,
+  )
+  assert.doesNotMatch(previews, /repeat until every page is clean/)
+  assert.match(previews, /Do not write `slides\/deck`/)
+  assert.match(previews, /do not read `node_modules`/)
+  assert.doesNotMatch(previews, /follow the `slide-authoring` skill/)
+  assert.doesNotMatch(previews, /webfonts\.md/)
+})
+
+test('autopilot deck mode skips create-slide and uses the check script', () => {
+  assert.match(agents, /Write slides\/deck\/index\.tsx/)
+  assert.match(agents, /Do not open create-slide or slide-authoring/)
+  assert.match(agents, /The "Which skill to use" list does not/)
+  assert.match(agents, /scripts\/check-slides\.sh/)
+  assert.match(agents, /Do not run the script a third time/)
+  assert.doesNotMatch(agents, /A new deck → `create-slide`/)
+  assert.match(agents, /Do not read `node_modules`/)
+  assert.match(agents, /Do not create `slides\/deck` in that mode/)
+  assert.match(agents, /palette: \{ bg, text, accent \}/)
+})

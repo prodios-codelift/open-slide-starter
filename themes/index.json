@@ -1,0 +1,1062 @@
+[
+  {
+    "id": "8-bit-orbit",
+    "name": "8-Bit Orbit",
+    "description": "Pixel-art neon arcade on a deep navy void, with hard 4px shadows, CRT scanlines and twinkling stars.",
+    "mode": "dark",
+    "mood": [
+      "retro-tech",
+      "playful",
+      "cyberpunk",
+      "energetic"
+    ],
+    "tone": [
+      "geeky",
+      "neon",
+      "rebellious",
+      "sci-fi"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "dark",
+    "best_for": "Anything that should feel like a CRT screen at 2am: cyberpunk, gaming, web3, indie dev tools, hackathon demos, synthwave brand decks, and tech talks leaning into nostalgic-digital craft.",
+    "avoid_for": "Contexts where the dark neon palette would actively work against the message — quiet institutional finance disclosures, healthcare patient-facing materials, traditional luxury."
+  },
+  {
+    "id": "biennale-yellow",
+    "name": "Biennale Yellow",
+    "description": "Solar yellow on warm parchment with deep indigo serif and atmospheric sun-glow gradients.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "atmospheric",
+      "warm",
+      "poster-like"
+    ],
+    "tone": [
+      "literary",
+      "considered",
+      "contemplative",
+      "Dutch-editorial"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Art-biennale posters and museum programmes: exhibition decks, arts-institution announcements, design-conference brochures, curatorial pitches, literary publications, and studio retrospectives.",
+    "avoid_for": "Decks that need visual punch or saturated multi-color energy; the warm-paper canvas and single yellow are intentionally quiet and atmospheric."
+  },
+  {
+    "id": "block-frame",
+    "name": "BlockFrame",
+    "description": "Neobrutalist deck with pastel-neon color blocks, chunky black borders and hard offset shadows.",
+    "mode": "light",
+    "mood": [
+      "bold",
+      "playful",
+      "graphic",
+      "fresh"
+    ],
+    "tone": [
+      "confident",
+      "graphic",
+      "pop",
+      "design-led"
+    ],
+    "formality": "medium",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Pop-graphic, design-led decks (SaaS launches, agency credentials, brand reviews), and a confident, contemporary pick for tech or finance.",
+    "avoid_for": "Contexts that need quiet institutional restraint or traditional weight, such as regulated disclosures or formal legal briefs."
+  },
+  {
+    "id": "blue-professional",
+    "name": "Blue Professional",
+    "description": "Warm cream paper with a single electric cobalt accent, Space Grotesk headlines and soft tinted cards; clean, modern, consulting-grade.",
+    "mode": "light",
+    "mood": [
+      "professional",
+      "modern",
+      "calm",
+      "trustworthy"
+    ],
+    "tone": [
+      "clean",
+      "considered",
+      "polished",
+      "neutral"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "B2B SaaS pitches, consulting deliverables, advisory updates, investor reports and research syntheses that should feel modern, considered and lightly authoritative without going stiff.",
+    "avoid_for": "Decks that should feel hot, playful or intentionally informal, where the cool electric-blue restraint reads as overly polished."
+  },
+  {
+    "id": "bold-poster",
+    "name": "Bold Poster",
+    "description": "White poster sheet, brown-black ink and one tomato red: tilted Shrikhand display over Baskerville body and tracked Space Grotesk labels.",
+    "mode": "light",
+    "mood": [
+      "bold",
+      "editorial",
+      "loud",
+      "confident"
+    ],
+    "tone": [
+      "dramatic",
+      "graphic",
+      "sharp",
+      "intentional"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Decks that should land like a magazine cover: brand manifestos, founder vision, editorial or cultural pitches, even a keynote that wants a few quotable words.",
+    "avoid_for": "Decks that must carry dense information per slide; the layout is built around a few large statements, not paragraphs of detail."
+  },
+  {
+    "id": "bold-signal",
+    "name": "Bold Signal",
+    "description": "A saturated orange card on a charcoal gradient, with oversized section numbers and poster-weight type.",
+    "mode": "dark",
+    "mood": [
+      "confident",
+      "bold",
+      "energetic",
+      "modern"
+    ],
+    "tone": [
+      "direct",
+      "assertive",
+      "punchy",
+      "contemporary"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Keynotes, pitch decks, product launches, and agency or brand presentations where every page lands one big idea with maximum impact.",
+    "avoid_for": "Dense data readouts, academic or compliance material, and quiet or somber topics — the orange slab shouts, and fine print drowns beside it."
+  },
+  {
+    "id": "broadside",
+    "name": "Broadside",
+    "description": "Protest-poster editorial: ink-black and fire-orange pages, massive lowercase Barlow 900, mono chrome and 1px hairlines.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "dramatic",
+      "loud",
+      "newspaper"
+    ],
+    "tone": [
+      "graphic",
+      "punchy",
+      "literary",
+      "considered"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "dark",
+    "best_for": "Brand manifestos, magazine and cultural pitches, design talks, founder vision statements and bilingual EN/CN decks that should land like a broadside headline.",
+    "avoid_for": "Decks that need to feel quiet, warm, or institutionally traditional — the ink-black canvas and fire-orange accent commit to drama."
+  },
+  {
+    "id": "capsule",
+    "name": "Capsule",
+    "description": "Ink-outlined candy pills on cream under Bodoni: Memphis-meets-editorial, modular and a little Y2K.",
+    "mode": "light",
+    "mood": [
+      "playful",
+      "modern",
+      "warm",
+      "fresh"
+    ],
+    "tone": [
+      "upbeat",
+      "graphic",
+      "approachable",
+      "cool"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Lifestyle, beauty and DTC launches, creator portfolios, agency credentials, and playful tech or research decks wanting pop-art clarity over gravitas.",
+    "avoid_for": "Institutional contexts — the pill shapes and pastel pops soften authority."
+  },
+  {
+    "id": "cartesian",
+    "name": "Cartesian",
+    "description": "Warm sandstone canvas, Playfair Display serifs and 1px taupe hairlines, with compass-drawn rings drifting behind; quiet and unhurried.",
+    "mode": "light",
+    "mood": [
+      "quiet",
+      "considered",
+      "elegant",
+      "warm-minimal"
+    ],
+    "tone": [
+      "classical",
+      "literary",
+      "restrained",
+      "confident-quiet"
+    ],
+    "formality": "high",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Investment theses, white papers, advisory work, longform research, and gallery or cultural decks where restraint is the message.",
+    "avoid_for": "Decks that need visual heat, multiple accents, or urgency; the warm-neutral palette is intentionally low-energy."
+  },
+  {
+    "id": "cobalt-grid",
+    "name": "Cobalt Grid",
+    "description": "Electric cobalt serifs on cream graph paper, framed by hairline rules and stair-stepped pixel-glitch scanlines.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "design-research",
+      "modernist",
+      "monochrome"
+    ],
+    "tone": [
+      "considered",
+      "literary",
+      "studious",
+      "quietly-modern"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Design-research bulletins, studio annuals, agency capabilities, architecture, art and academic decks, and curated trend reports that want one strict ink and printed-ledger calm.",
+    "avoid_for": "Decks that need warmth, multi-colour energy, or a casual, playful voice; the cobalt, cream and grid palette is intentionally austere."
+  },
+  {
+    "id": "coral",
+    "name": "Coral",
+    "description": "Coral, ink and cream planes meeting at hard edges, set in oversized tracked Bebas Neue with a 45° hatch.",
+    "mode": "light",
+    "mood": [
+      "bold",
+      "warm",
+      "modern",
+      "confident"
+    ],
+    "tone": [
+      "graphic",
+      "punchy",
+      "magazine"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Warm, graphic, editorial decks: fashion, beauty, fitness, F&B, lifestyle brands, agency credentials, creator portfolios, manifestos, or a tech deck wanting one bold accent over corporate cool.",
+    "avoid_for": "Quiet, institutional contexts; the coral accent and oversized Bebas Neue commit hard to a confident magazine voice."
+  },
+  {
+    "id": "creative-mode",
+    "name": "Creative Mode",
+    "description": "Neo-brutalist cream paper with 4px ink borders, hard offset shadows, uppercase Archivo Black and flat green, pink, orange and yellow blocks.",
+    "mode": "light",
+    "mood": [
+      "creative",
+      "confident",
+      "playful",
+      "design-led"
+    ],
+    "tone": [
+      "graphic",
+      "expressive",
+      "modern"
+    ],
+    "formality": "medium",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Design-led decks that lead with taste: agency pitches, studio credentials, brand and art-direction reviews, or an unexpected tech talk or finance review.",
+    "avoid_for": "Contexts that demand institutional restraint and quiet authority; the saturated multi-accent palette reads as expressive, not formal."
+  },
+  {
+    "id": "creative-voltage",
+    "name": "Creative Voltage",
+    "description": "Electric blue split against midnight navy, a neon-yellow charge, wide Syne headlines, and a hand-signed script flourish.",
+    "mode": "dark",
+    "mood": [
+      "energetic",
+      "bold",
+      "creative",
+      "playful"
+    ],
+    "tone": [
+      "punchy",
+      "irreverent",
+      "confident",
+      "retro-modern"
+    ],
+    "formality": "low",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Creative agency and studio pitches, brand or product launches, design and creative-tech talks, hackathon demos, and event decks that should feel charged and a little rebellious.",
+    "avoid_for": "Board, finance, legal, or somber topics and dense data readouts. The neon and script flourishes undercut gravity, and mono body copy is slow to read in bulk."
+  },
+  {
+    "id": "daisy-days",
+    "name": "Daisy Days",
+    "description": "Cheerful pastel storybook deck: chunky Fredoka headlines, charcoal-outlined stickers with hard offset shadows, and hand-drawn daisies, stars and rainbows.",
+    "mode": "light",
+    "mood": [
+      "cheerful",
+      "playful",
+      "warm",
+      "sunny"
+    ],
+    "tone": [
+      "friendly",
+      "soft",
+      "encouraging",
+      "approachable"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Friendly, soft, joyful decks: education, kids and family, wellness, community workshops, craft portfolios, or a playful internal kickoff.",
+    "avoid_for": "Audiences that expect authority and precision; the hand-drawn pastel stickers are the opposite of buttoned-up."
+  },
+  {
+    "id": "dark-botanical",
+    "name": "Dark Botanical",
+    "description": "Near-black canvas with centered Cormorant serif, soft blurred orbs of terracotta, blush and gold pooled in one corner.",
+    "mode": "dark",
+    "mood": [
+      "elegant",
+      "sophisticated",
+      "artistic",
+      "premium"
+    ],
+    "tone": [
+      "refined",
+      "poetic",
+      "understated",
+      "warm"
+    ],
+    "formality": "high",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Luxury, beauty, fashion and lifestyle brand stories, gallery or cultural talks, and premium product launches that want a quiet, gallery-lit elegance.",
+    "avoid_for": "Data-dense readouts, engineering reviews, and table- or chart-heavy decks — the light serif, muted grey, and centered sparse layout lose clarity under load."
+  },
+  {
+    "id": "editorial-forest",
+    "name": "Editorial Forest",
+    "description": "Forest green, dusty rose and oat-cream paper under Source Serif 4 at weight 500, with tracked JetBrains Mono chrome: a quiet literary quarterly.",
+    "mode": "dark",
+    "mood": [
+      "editorial",
+      "quiet",
+      "considered",
+      "warm"
+    ],
+    "tone": [
+      "literary",
+      "thoughtful",
+      "warm",
+      "low-pressure"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Quarterly reviews, internal readouts, studio or agency updates, research recaps and retrospectives that should feel warm and unhurried rather than corporate.",
+    "avoid_for": "Contexts that need to feel urgent, punchy or sales-driven — the palette and rhythm are intentionally quiet."
+  },
+  {
+    "id": "editorial-tri-tone",
+    "name": "Editorial Tri-Tone",
+    "description": "Blush pink, golden butter and deep burgundy only: heavy Bricolage Grotesque interrupted by Instrument Serif italics, pill tag clouds and mono labels.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "warm",
+      "intentional",
+      "moody"
+    ],
+    "tone": [
+      "literary",
+      "warm",
+      "considered",
+      "stylish"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Fashion-magazine-style decks (editorial pitches, fashion and lifestyle brands, art direction reviews) or any business or research deck wanting tri-tone discipline and serif/sans contrast over neutrals.",
+    "avoid_for": "Decks that need to read as soft or comforting; the burgundy, pink and butter tri-tone is intentionally high-contrast and styled."
+  },
+  {
+    "id": "electric-studio",
+    "name": "Electric Studio",
+    "description": "White panel over electric blue, Manrope at 800, and a quote set as the hero.",
+    "mode": "light",
+    "mood": [
+      "bold",
+      "confident",
+      "crisp",
+      "energetic"
+    ],
+    "tone": [
+      "clean",
+      "professional",
+      "direct",
+      "assured"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "mixed",
+    "best_for": "Studio and agency pitches, product or brand launches, keynotes, and client presentations that carry one big idea or quote per page.",
+    "avoid_for": "Dense data reports or long-form reading. The split panels and oversized type leave little room for tables and paragraphs."
+  },
+  {
+    "id": "emerald-editorial",
+    "name": "Emerald Editorial",
+    "description": "Magazine-cover editorial: saturated emerald, deep navy ink and oat paper, Bodoni Moda 900 at poster scale, and double-rule playbill ornaments.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "considered",
+      "confident",
+      "magazine-cover"
+    ],
+    "tone": [
+      "literary",
+      "authoritative",
+      "warm",
+      "designed"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Leadership readouts, strategy briefings and planning reviews, or launches and research recaps, that should feel like the front of a serious magazine.",
+    "avoid_for": "Contexts that need to read as quiet, neutral, or institutionally restrained; the emerald field is too saturated to disappear into the background."
+  },
+  {
+    "id": "grove",
+    "name": "Grove",
+    "description": "Forest-green canvas with warm cream type, Playfair Display never bolder than 400, and a single terracotta-coral accent.",
+    "mode": "dark",
+    "mood": [
+      "organic",
+      "considered",
+      "literary",
+      "natural"
+    ],
+    "tone": [
+      "classical",
+      "warm",
+      "considered",
+      "patient"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Organic, grown-up decks: sustainability, wellness, outdoor, wine and food, literary or arts, advisory reports, or calm tech and research talks.",
+    "avoid_for": "Decks that need neon energy or rapid-fire pop; the forest green and Playfair serif commit to a slow, classical voice."
+  },
+  {
+    "id": "long-table",
+    "name": "Long Table",
+    "description": "One rust-terracotta ink on buttery cream paper: uppercase Bricolage headlines, italic Fraunces body, outlined pills — a supper-club programme.",
+    "mode": "light",
+    "mood": [
+      "warm",
+      "intimate",
+      "small-batch",
+      "hospitality"
+    ],
+    "tone": [
+      "warm",
+      "playful",
+      "considered",
+      "modern-editorial"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Warm, intimate hospitality and community brands: supper clubs, dinner series, small restaurants, studio events, membership pitches, lifestyle and wine brands.",
+    "avoid_for": "Decks needing corporate polish, technical density, or a cold minimalist register — the rust ink and bold serif mix are intentionally warm and people-facing."
+  },
+  {
+    "id": "mat",
+    "name": "Mat",
+    "description": "Dark forest-green canvas warmed by a wood-brown corner glow, cream Bricolage type floating on the field, one burnt-orange accent; mid-century and tactile.",
+    "mode": "dark",
+    "mood": [
+      "warm-modern",
+      "considered",
+      "tactile",
+      "mid-century"
+    ],
+    "tone": [
+      "warm",
+      "design-led",
+      "intentional",
+      "considered"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Design studio credentials, architecture, interior, craft and furniture brands, advisory decks, and tech or research talks that want a considered analog feel.",
+    "avoid_for": "Contexts that need fast tech energy or institutional restraint — the muted sage and burnt-orange palette is intentionally warm and slow."
+  },
+  {
+    "id": "monochrome",
+    "name": "Monochrome",
+    "description": "Black ink on ivory ledger paper: paper-thin Jost headlines, Lora italic for the human voice, tracked mono chrome, and no colour at all.",
+    "mode": "light",
+    "mood": [
+      "restrained",
+      "literary",
+      "archival",
+      "ledger"
+    ],
+    "tone": [
+      "literary",
+      "considered",
+      "neutral",
+      "honest"
+    ],
+    "formality": "high",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables and bilingual EN/CN reports that should read like a hand-typeset ledger, with the words as the only thing on the page.",
+    "avoid_for": "Decks that need visual personality or colour-led storytelling; the all-ink palette is intentionally austere."
+  },
+  {
+    "id": "neo-grid-bold",
+    "name": "Neo-Grid Bold",
+    "description": "Editorial neo-brutalism on a strict 12 × 8 panel grid: putty paper, ink blocks and one electric lemon accent.",
+    "mode": "light",
+    "mood": [
+      "confident",
+      "punchy",
+      "editorial",
+      "modern"
+    ],
+    "tone": [
+      "bold",
+      "minimal",
+      "design-led",
+      "graphic"
+    ],
+    "formality": "medium",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Design-led pitches, brand work, founder talks and keynotes, especially stat-heavy, comparison and process slides that should read design-led rather than corporate.",
+    "avoid_for": "Contexts that need to feel quiet, traditional or warm; the neon-yellow accent and uppercase display commit to a loud editorial voice."
+  },
+  {
+    "id": "neon-cyber",
+    "name": "Neon Cyber",
+    "description": "Deep navy void lit by cyan and magenta neon: glowing type, drifting particles, and luminous grids.",
+    "mode": "dark",
+    "mood": [
+      "futuristic",
+      "electric",
+      "confident",
+      "techy"
+    ],
+    "tone": [
+      "bold",
+      "technical",
+      "sleek",
+      "forward-looking"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Product launches, AI and developer keynotes, hackathon demos, and startup pitches that should feel futuristic and high-energy.",
+    "avoid_for": "Conservative finance, legal, healthcare, or academic rooms and data-dense readouts; the glow and particle texture fight fine print and read as flashy."
+  },
+  {
+    "id": "notebook-tabs",
+    "name": "Notebook Tabs",
+    "description": "A cream paper page on a dark desk, punched binder holes on the left and pastel index tabs down the right edge.",
+    "mode": "light",
+    "mood": [
+      "editorial",
+      "organized",
+      "elegant",
+      "tactile"
+    ],
+    "tone": [
+      "refined",
+      "orderly",
+      "warm",
+      "crafted"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "mixed",
+    "best_for": "Multi-section reports, workshop or course material, research readouts, and planning decks where the coloured tabs double as a visible table of contents.",
+    "avoid_for": "High-energy launches, dark dramatic keynotes, or decks with no clear sections — without real chapters the tabs become decoration with nothing to index."
+  },
+  {
+    "id": "paper-and-ink",
+    "name": "Paper & Ink",
+    "description": "Warm cream paper, charcoal serif type, and one crimson mark: a literary page of drop caps, pull quotes, and fine rules.",
+    "mode": "light",
+    "mood": [
+      "literary",
+      "thoughtful",
+      "refined",
+      "calm"
+    ],
+    "tone": [
+      "editorial",
+      "reflective",
+      "elegant",
+      "measured"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Essays and keynote talks, research or book presentations, annual letters, and narrative strategy reviews where well-set prose and quotation carry the argument.",
+    "avoid_for": "Data-dense dashboards, product demos, or high-energy launches: the quiet all-serif page reads as slow and bookish when the content needs punch."
+  },
+  {
+    "id": "pastel-geometry",
+    "name": "Pastel Geometry",
+    "description": "A rounded off-white card on powder blue, with a rail of candy-coloured vertical pills stepping short-tall-short down the right edge.",
+    "mode": "light",
+    "mood": [
+      "friendly",
+      "organized",
+      "modern",
+      "approachable"
+    ],
+    "tone": [
+      "warm",
+      "clear",
+      "upbeat",
+      "tidy"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Onboarding, product walkthroughs, team updates, workshops, and education decks that should feel friendly and well organized rather than corporate.",
+    "avoid_for": "Sober or high-stakes briefings (board, legal, crisis) where candy pastels undercut authority, and data-dense pages the inset card cannot hold."
+  },
+  {
+    "id": "peoples-platform",
+    "name": "People's Platform",
+    "description": "Activist poster energy: cobalt blue and amber slab caps with stacked red shadows on screen-printed paper, plus a Caveat Brush interrupt.",
+    "mode": "dark",
+    "mood": [
+      "activist",
+      "loud",
+      "graphic",
+      "honest"
+    ],
+    "tone": [
+      "punchy",
+      "direct",
+      "expressive",
+      "warm-bold"
+    ],
+    "formality": "low",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Manifestos, civic and community decks, campaign pitches, design talks and founder-vision moments that want protest-poster energy instead of corporate polish.",
+    "avoid_for": "Contexts where institutional restraint is the actual goal; the saturated political-poster palette commits hard to expressive energy."
+  },
+  {
+    "id": "pin-and-paper",
+    "name": "Pin & Paper",
+    "description": "Yellow legal-pad paper with a fractal grain, cobalt-ink Space Grotesk, Caveat margin notes and hand-drawn safety pins.",
+    "mode": "light",
+    "mood": [
+      "crafted",
+      "handmade",
+      "warm",
+      "thoughtful"
+    ],
+    "tone": [
+      "literary",
+      "intimate",
+      "warm",
+      "grounded"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Qualitative research findings, founder reflections, longform brand stories and workshop debriefs that want warmth and personality over polish.",
+    "avoid_for": "Decks that need to feel digital-native polished or rigorously data-driven; the handwritten Caveat is intentionally informal."
+  },
+  {
+    "id": "pink-script",
+    "name": "Pink Script (After Hours)",
+    "description": "Black canvas, hot pink accent, pearl-cream paper, DM Serif Display headlines: late-night editorial luxury.",
+    "mode": "dark",
+    "mood": [
+      "nocturnal",
+      "moody",
+      "intentional",
+      "luxe",
+      "expressive"
+    ],
+    "tone": [
+      "literary",
+      "sultry",
+      "considered",
+      "magazine"
+    ],
+    "formality": "high",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Fashion, creator, after-hours/nightlife, and luxury product decks that want to feel nocturnal, intentional and a little luxe — also a striking unexpected pick for a keynote or pitch that wants magnetic confidence.",
+    "avoid_for": "Daytime corporate-professional and traditional B2B contexts where the dark canvas and hot-pink accent read as too styled or too expressive."
+  },
+  {
+    "id": "playful",
+    "name": "Playful",
+    "description": "Sun-warm peach canvas with charcoal double-stroke cards, hand-rotated blocks, and Syne display type — a friendly indie launch deck.",
+    "mode": "light",
+    "mood": [
+      "warm",
+      "approachable",
+      "indie",
+      "friendly"
+    ],
+    "tone": [
+      "upbeat",
+      "informal",
+      "welcoming"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Indie product launches, creator portfolios, lifestyle brands, and small-business or community decks that want to feel warm and human.",
+    "avoid_for": "Contexts where institutional credibility matters more than warmth — the peach palette is intentionally informal."
+  },
+  {
+    "id": "raw-grid",
+    "name": "Raw Grid",
+    "description": "Neobrutalist grid where 3px black borders ARE the layout, weight-900 uppercase type, and hard offset shadows meet blush-pink and sage-green fills.",
+    "mode": "light",
+    "mood": [
+      "raw",
+      "punchy",
+      "energetic",
+      "confident"
+    ],
+    "tone": [
+      "direct",
+      "modern",
+      "no-nonsense",
+      "graphic"
+    ],
+    "formality": "low",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Founder pitches, accelerator demos, brand decks, and indie launches that want to feel direct and graphic-confident — strong for stat slides, comparisons, and process flows.",
+    "avoid_for": "Contexts that need to feel soft, warm, or intentionally quiet — the brutalist borders and offset shadows commit to a graphic voice."
+  },
+  {
+    "id": "retro-windows",
+    "name": "Retro Windows",
+    "description": "Windows 95/98 desktop chrome: beveled gray windows, navy gradient title bars, MS Sans Serif, CRT scanlines.",
+    "mode": "light",
+    "mood": [
+      "nostalgic",
+      "retro",
+      "geeky",
+      "playful"
+    ],
+    "tone": [
+      "winking",
+      "nostalgic",
+      "geeky",
+      "fun"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Anything that should feel knowingly nostalgic — retro gaming, Y2K-aesthetic brands, 90s-vibe creator portfolios, tech-history talks, and deliberately tongue-in-cheek decks.",
+    "avoid_for": "Decks that need to read as modern, elegant, or institutionally credible — the Win95 chrome will always read as a costume."
+  },
+  {
+    "id": "retro-zine",
+    "name": "Retro Zine",
+    "description": "Beige paper with green accent and Bebas Neue + Caveat: a riso-printed zine in HTML form.",
+    "mode": "light",
+    "mood": [
+      "crafted",
+      "lo-fi",
+      "underground",
+      "warm-retro"
+    ],
+    "tone": [
+      "scrappy",
+      "warm",
+      "intentional",
+      "DIY"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Indie zines, music/arts brands, creator portfolios, small-batch craft launches, and community decks that want riso-print warmth over digital polish.",
+    "avoid_for": "Contexts that demand digital-native polish or fast modern-tech energy — the layered zine aesthetic intentionally feels handmade."
+  },
+  {
+    "id": "sakura-chroma",
+    "name": "Sakura Chroma",
+    "description": "Warm cream cassette-package catalogue: condensed 900-weight display type, ink structure, and a six-color primary ribbon-and-petal system.",
+    "mode": "light",
+    "mood": [
+      "retro",
+      "playful",
+      "kawaii-tech",
+      "warm",
+      "tactile"
+    ],
+    "tone": [
+      "playful",
+      "confident",
+      "warm",
+      "tactile",
+      "80s-Japanese-tech"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Indie hardware and music-label decks, analog-studio retrospectives, zine pitches, and kawaii-tech product launches wanting bold color and tactile printed-product personality.",
+    "avoid_for": "Restrained or quiet corporate/legal/academic contexts — the condensed lockups, ribbon stripes, and primary palette are intentionally loud."
+  },
+  {
+    "id": "scatterbrain",
+    "name": "Scatterbrain",
+    "description": "A Post-it-and-cork-board system: pastel sticky notes, red thumbtacks, and a three-voice Shrikhand/Zilla Slab/Caveat type stack.",
+    "mode": "light",
+    "mood": [
+      "playful",
+      "creative",
+      "warm",
+      "workshop"
+    ],
+    "tone": [
+      "informal",
+      "warm",
+      "expressive",
+      "human"
+    ],
+    "formality": "low",
+    "density": "high",
+    "scheme": "light",
+    "best_for": "Brainstorms, workshops, creative-agency credentials, and design-thinking sessions that want to read as in-progress thinking rather than a polished conclusion.",
+    "avoid_for": "Contexts that demand institutional precision — the sticky-note aesthetic intentionally reads as warm and unfinished."
+  },
+  {
+    "id": "signal",
+    "name": "Signal",
+    "description": "Deep navy canvas with bone paper and a single muted-gold accent; institutional with quiet weight.",
+    "mode": "dark",
+    "mood": [
+      "institutional",
+      "trustworthy",
+      "considered",
+      "weighty"
+    ],
+    "tone": [
+      "sober",
+      "polished",
+      "established",
+      "literary"
+    ],
+    "formality": "high",
+    "density": "high",
+    "scheme": "mixed",
+    "best_for": "Investor decks, board presentations, consulting deliverables, legal/policy briefs, and advisory pitches that want quiet, credible authority.",
+    "avoid_for": "Contexts that should feel hot, fast, or intentionally playful — the navy and gold restraint commits to a sober voice."
+  },
+  {
+    "id": "soft-editorial",
+    "name": "Soft Editorial",
+    "description": "Cormorant Garamond serif on warm cream paper with pastel candy cards in pink, lemon, blush, sage, and lilac.",
+    "mode": "light",
+    "mood": [
+      "literary",
+      "elegant",
+      "quiet",
+      "warm-classical"
+    ],
+    "tone": [
+      "literary",
+      "considered",
+      "warm",
+      "magazine"
+    ],
+    "formality": "high",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Editorial features, longform brand stories, gallery or museum decks, and advisory or founder-essay decks that want literary, unhurried warmth.",
+    "avoid_for": "Decks that need visual heat or punch — the warm-paper palette and Cormorant serif are intentionally quiet."
+  },
+  {
+    "id": "split-pastel",
+    "name": "Split Pastel",
+    "description": "Peach and lavender halves, Outfit at 800, and ink-outlined pastel badge pills over a soft grid.",
+    "mode": "light",
+    "mood": [
+      "playful",
+      "friendly",
+      "fresh",
+      "creative"
+    ],
+    "tone": [
+      "warm",
+      "approachable",
+      "upbeat",
+      "casual"
+    ],
+    "formality": "low",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Workshops, onboarding, product walkthroughs, creative pitches, and community or education talks that should feel warm, approachable, and a little playful.",
+    "avoid_for": "Board reports, financial reviews, or anything that must read as severe. The candy pastels undercut gravity, and the split halves leave little room for dense tables."
+  },
+  {
+    "id": "stencil-tablet",
+    "name": "Stencil & Tablet",
+    "description": "Bone paper with stencil-cut headlines and a seven-color earth palette: archaeology meets brand.",
+    "mode": "light",
+    "mood": [
+      "archival",
+      "earthy",
+      "tactile",
+      "considered",
+      "graphic"
+    ],
+    "tone": [
+      "weighty",
+      "considered",
+      "tactile",
+      "literary"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Museum and cultural-institution decks, art/architecture brands, heritage and craft brands, longform research, and manifestos that want a tactile field-manual feel.",
+    "avoid_for": "Contexts that demand digital-native polish or playful pop — the stencil-cut display and earth-tone palette commit to a deliberate analog feel."
+  },
+  {
+    "id": "studio",
+    "name": "Studio",
+    "description": "Black canvas with acid-yellow Barlow type at weight 900 uppercase — type-as-graphic-mass, high-voltage design-studio manifesto energy.",
+    "mode": "dark",
+    "mood": [
+      "electric",
+      "bold",
+      "graphic",
+      "design-led",
+      "high-contrast"
+    ],
+    "tone": [
+      "graphic",
+      "loud",
+      "modern",
+      "intentional"
+    ],
+    "formality": "medium",
+    "density": "medium",
+    "scheme": "dark",
+    "best_for": "Anything that should feel electric and design-led — studio credentials, creative agency pitches, brand showcases, art-direction reviews, fashion/sneaker brand work — and any tech or business deck that wants to read as a brand statement.",
+    "avoid_for": "Contexts that should feel quiet or institutional — the black-and-electric-yellow palette is the loudest in the library."
+  },
+  {
+    "id": "swiss-modern",
+    "name": "Swiss Modern",
+    "description": "Bauhaus-precise grid on pure white and black, with one confident red accent.",
+    "mode": "light",
+    "mood": [
+      "precise",
+      "confident",
+      "modern",
+      "structured"
+    ],
+    "tone": [
+      "clean",
+      "rational",
+      "authoritative",
+      "minimal"
+    ],
+    "formality": "high",
+    "density": "medium",
+    "scheme": "light",
+    "best_for": "Product launches, design systems, and technical or engineering readouts that want to look precise and considered rather than decorative.",
+    "avoid_for": "Warm, personal, or narrative-driven content — the grid-first system reads as cold when the content itself carries no structure."
+  },
+  {
+    "id": "terminal-green",
+    "name": "Terminal Green",
+    "description": "GitHub-dark terminal with phosphor-green prompts, a blinking cursor, and faint CRT scan lines, set in monospace from top to bottom.",
+    "mode": "dark",
+    "mood": [
+      "technical",
+      "focused",
+      "nocturnal",
+      "hackerish"
+    ],
+    "tone": [
+      "terse",
+      "direct",
+      "nerdy",
+      "precise"
+    ],
+    "formality": "low",
+    "density": "medium",
+    "scheme": "dark",
+    "best_for": "Developer talks, engineering demos, devtool/API/CLI launches, architecture walkthroughs, and hackathon pitches where code on screen is part of the story.",
+    "avoid_for": "Executive, brand, or general-audience decks: all-monospace green-on-black reads as insider cosplay outside a technical room, and long prose in mono tires the eye."
+  },
+  {
+    "id": "vellum",
+    "name": "Vellum",
+    "description": "Deep periwinkle navy field with italic Cormorant Garamond in warm chartreuse-yellow, and a dusty-teal pin-note in the corner. Scholarly, still, monochromatic.",
+    "mode": "dark",
+    "mood": [
+      "scholarly",
+      "literary",
+      "considered",
+      "quiet"
+    ],
+    "tone": [
+      "literary",
+      "considered",
+      "patient",
+      "intelligent"
+    ],
+    "formality": "high",
+    "density": "low",
+    "scheme": "dark",
+    "best_for": "Research synthesis, white papers, academic and policy briefs, advisory deliverables, and founder reflections that want a scholarly, quietly intelligent, calm atmosphere instead of energetic visuals.",
+    "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo."
+  },
+  {
+    "id": "vintage-editorial",
+    "name": "Vintage Editorial",
+    "description": "Warm cream pages and heavy Fraunces headlines with a wink, punctuated by circle-line-dot geometry and bold bordered boxes.",
+    "mode": "light",
+    "mood": [
+      "witty",
+      "confident",
+      "editorial",
+      "warm"
+    ],
+    "tone": [
+      "conversational",
+      "playful",
+      "literate",
+      "assured"
+    ],
+    "formality": "medium",
+    "density": "low",
+    "scheme": "light",
+    "best_for": "Brand stories, thought-leadership talks, agency or creative pitches, and culture or publishing decks where a voice with personality carries the argument.",
+    "avoid_for": "Dense data readouts, technical deep-dives, and somber or compliance-heavy material — the wit and airy centred column undercut gravity and can't hold fine detail."
+  }
+]
