@@ -36,7 +36,8 @@ When this workspace runs inside Prodios Autopilot, a builder agent works here wh
   - Run `scripts/check-slides.sh <id>` (`previews` or `deck`). Review that run's screenshots in one message.
   - When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until `slides/<id>/index.tsx` has changed.
   - `no-deck` with `typecheck: pass` means the script already retried and still found no slide canvas. Check that `slides/<id>/index.tsx` has `export default` pages and `export const meta`, and fix what is missing. Run the script once more after a fix. If it still reports `no-deck`, stop and say so. Do not read `node_modules`, `open-slide.config.ts`, framework source or the dev-server log.
+  - Do not run `agent-browser` yourself, write probe scripts, or edit the slide to experiment. A finding you cannot trace to the slide file is not yours to chase: name it in your summary and finish.
   - A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
   - Style previews write only `slides/previews/index.tsx`. Do not create `slides/deck` in that mode.
-  - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.
+  - Name any issues that remain. If a page reports `build-error`, run `tail -n 40` on the dev-server log (the path is in your prompt) with `bash`, since the `read` tool cannot open `/tmp`, and fix it in that same edit.
 - The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.

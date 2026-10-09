@@ -9,17 +9,16 @@ id="${1:?usage: scripts/check-slides.sh <slide-id>}"
 cd "$(dirname "$0")/.."
 
 work=$(mktemp -d)
-trap 'rm -rf "$work"' EXIT
+typecheck_pid=
+trap '[[ -n $typecheck_pid ]] && kill "$typecheck_pid" 2>/dev/null; rm -rf "$work"' EXIT
 typecheck_log="$work/typecheck.txt"
 current="${OPEN_SLIDE_CURRENT:-node_modules/.open-slide/current.json}"
 limit=40
 rm -f /tmp/slides-"${id}"-*.png
 
-if npm run typecheck >"$typecheck_log" 2>&1; then
-  typecheck=pass
-else
-  typecheck=fail
-fi
+# Runs beside the browser walk and is collected once the walk ends.
+npm run typecheck >"$typecheck_log" 2>&1 &
+typecheck_pid=$!
 
 # totalPages of this slide as the dev server last recorded it, once page 1 mounted.
 read_total() {
@@ -51,27 +50,38 @@ total=1
 total_pages=null
 truncated=false
 while [[ $page -le $total ]]; do
-  # no-deck can be a page that is slow to mount, so look twice before trusting it.
+  # no-deck can be a page that is slow to mount, or a browser left blank by the dev server's
+  # first dependency re-optimization, so the second look starts from a fresh browser.
   for attempt in 1 2; do
-    goto_page "$page" "$attempt" || exit $?
-    raw=$(agent-browser eval "$(cat scripts/verify-slides.js)") || exit $?
-    printf '%s' "$raw" > "$work/raw.txt"
-    node --input-type=module -e '
-      import { readFileSync, writeFileSync } from "node:fs"
-      const raw = readFileSync(process.argv[1], "utf8")
-      const start = raw.indexOf("{")
-      const end = raw.lastIndexOf("}")
-      if (start === -1 || end < start) {
-        console.error("verify-slides returned no JSON")
-        process.exit(2)
-      }
-      const data = JSON.parse(raw.slice(start, end + 1))
-      const issues = Array.isArray(data.issues) ? data.issues : []
-      const noDeck = issues.some((issue) => issue.type === "no-deck")
-      writeFileSync(process.argv[2], JSON.stringify({ noDeck, page: String(data.page ?? process.argv[3]), issues }))
-      process.exit(noDeck ? 0 : 10)
-    ' "$work/raw.txt" "$work/parsed.json" "$page"
-    status=$?
+    if [[ $attempt -eq 2 ]]; then
+      agent-browser close --all >/dev/null 2>&1
+      agent-browser open about:blank || exit $?
+    fi
+    # A browser that dies or errors on the first look is retried the same way as no-deck.
+    if goto_page "$page" "$attempt" && raw=$(agent-browser eval "$(cat scripts/verify-slides.js)"); then
+      printf '%s' "$raw" > "$work/raw.txt"
+      node --input-type=module -e '
+        import { readFileSync, writeFileSync } from "node:fs"
+        const raw = readFileSync(process.argv[1], "utf8")
+        const start = raw.indexOf("{")
+        const end = raw.lastIndexOf("}")
+        if (start === -1 || end < start) {
+          console.error("verify-slides returned no JSON")
+          process.exit(2)
+        }
+        const data = JSON.parse(raw.slice(start, end + 1))
+        const issues = Array.isArray(data.issues) ? data.issues : []
+        const noDeck = issues.some((issue) => issue.type === "no-deck")
+        writeFileSync(process.argv[2], JSON.stringify({ noDeck, page: String(data.page ?? process.argv[3]), issues }))
+        process.exit(noDeck ? 0 : 10)
+      ' "$work/raw.txt" "$work/parsed.json" "$page"
+      status=$?
+    else
+      browser_status=$?
+      if [[ $attempt -eq 2 ]]; then exit "$browser_status"; fi
+      status=0
+      continue
+    fi
     if [[ $status -ne 0 ]]; then break; fi
   done
   if [[ $status -eq 2 ]]; then exit 2; fi
@@ -101,6 +111,13 @@ while [[ $page -le $total ]]; do
   fi
   page=$((page + 1))
 done
+
+if wait "$typecheck_pid"; then
+  typecheck=pass
+else
+  typecheck=fail
+fi
+typecheck_pid=
 
 node --input-type=module -e '
   import { readdirSync, readFileSync } from "node:fs"

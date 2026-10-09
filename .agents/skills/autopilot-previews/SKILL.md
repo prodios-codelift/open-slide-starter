@@ -32,6 +32,19 @@ A custom palette, fonts, and signature element fill a slot only when no unused t
 
 Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write only `slides/previews/index.tsx`. Do not write `slides/deck`. One slide, three pages, in order A, B, C:
 
+The file has this shape. Pages are plain components; `Page` comes from `@open-slide/core`, and nothing else in the framework needs to be read:
+
+```tsx
+import type { Page } from '@open-slide/core'
+
+const CoverA: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page A */}</div>
+const CoverB: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page B */}</div>
+const CoverC: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page C */}</div>
+
+export default [CoverA, CoverB, CoverC] satisfies Page[]
+export const meta = { title: 'Style previews', createdAt: '<ISO timestamp>' }
+```
+
 - Each page is the deck's real cover: the brief's title, a subtitle from the occasion or audience, and an eyebrow such as the date or team. Only real deck content.
 - Each page uses its theme's palette, webfont stylesheet URL, and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
 - Load each webfont stylesheet once, at module top level, never inside a page component: create or update one `<link rel="stylesheet">` in `document.head` (`typeof document !== 'undefined'` guard) with id `osd-webfont-previews-a`, `-b` and `-c`, and set its `href` to the theme's stylesheet URL. A `<link>` or `@import` rendered inside a page registers the fonts again for every page.
@@ -44,7 +57,7 @@ Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. A
 
 Run `scripts/check-slides.sh previews` once. Review that run's screenshots in one message. When the summary has issues, or a screenshot shows a problem, fix every one of them in one edit of `slides/previews/index.tsx`, run the script once more, and review the new screenshots in one message. A clean first run does not run the script again. Do not run the script a third time. Do not run it again until that file has changed. Name any issues that remain.
 
-`no-deck` with `typecheck: pass` means the script already retried and still found no slide canvas. There are no screenshots. Check that `slides/previews/index.tsx` has `export default` pages and `export const meta`, and fix what is missing. Run the script once more after a fix. If it still reports `no-deck`, stop and say so. Do not curl the page, do not grep `@open-slide`, and do not read `node_modules` or the dev-server log. A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
+`no-deck` with `typecheck: pass` means the script already retried and still found no slide canvas. There are no screenshots. Check that `slides/previews/index.tsx` has `export default` pages and `export const meta`, and fix what is missing. Run the script once more after a fix. If it still reports `no-deck`, stop and say so. Do not curl the page, do not grep `@open-slide`, and do not read `node_modules` or the dev-server log. Do not run `agent-browser` yourself, write probe scripts, or edit the slide to experiment. A finding you cannot trace to the slide file is not yours to chase: name it in your summary and finish. A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
 
 ## 5. Summary
 
