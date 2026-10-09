@@ -14,7 +14,10 @@ trap '[[ -n $typecheck_pid ]] && kill "$typecheck_pid" 2>/dev/null; rm -rf "$wor
 typecheck_log="$work/typecheck.txt"
 current="${OPEN_SLIDE_CURRENT:-node_modules/.open-slide/current.json}"
 limit=40
-rm -f /tmp/slides-"${id}"-*.png
+# Inside the workspace, because the builder's read tool cannot open /tmp.
+shots=node_modules/.cache/autopilot-shots
+mkdir -p "$shots"
+rm -f "$shots/${id}"-*.png
 
 # Runs beside the browser walk and is collected once the walk ends.
 npm run typecheck >"$typecheck_log" 2>&1 &
@@ -92,7 +95,7 @@ while [[ $page -le $total ]]; do
     break
   fi
   if [[ $status -ne 10 ]]; then exit "$status"; fi
-  agent-browser screenshot "/tmp/slides-${id}-${page}.png" || exit $?
+  agent-browser screenshot "$shots/${id}-${page}.png" || exit $?
   mv "$work/parsed.json" "$work/keep-$page.json"
   if [[ $page -eq 1 ]]; then
     for _ in 1 2 3 4 5 6 7 8 9 10; do
