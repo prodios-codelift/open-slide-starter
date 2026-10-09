@@ -39,5 +39,5 @@ When this workspace runs inside Prodios Autopilot, a builder agent works here wh
   - Do not run `agent-browser` yourself, write probe scripts, or edit the slide to experiment. A finding you cannot trace to the slide file is not yours to chase: name it in your summary and finish.
   - A harness error `File exists` means the directory is already there and the write did not save. Write the file again. It is not a slide bug.
   - Style previews write only `slides/previews/index.tsx`. Do not create `slides/deck` in that mode.
-  - Name any issues that remain. If a page reports `build-error`, read the dev-server log (the path is in your prompt) and fix it in that same edit.
+  - Name any issues that remain. If a page reports `build-error`, run `tail -n 40` on the dev-server log (the path is in your prompt) with `bash`, since the `read` tool cannot open `/tmp`, and fix it in that same edit.
 - The dev server is already running on port 3000. Never start, stop or restart it, and never run `npm install`, `sync:skills` or package updates.

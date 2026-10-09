@@ -32,6 +32,19 @@ A custom palette, fonts, and signature element fill a slot only when no unused t
 
 Read `themes/<id>.md` for each picked id, in one turn. The id is the filename. Any two picks must differ in at least two of palette family, light vs dark (`mode`), and display typeface character (serif, geometric sans, grotesk, mono). If two collide, swap the weaker fit for the next index candidate and read that one file. Write only `slides/previews/index.tsx`. Do not write `slides/deck`. One slide, three pages, in order A, B, C:
 
+The file has this shape. Pages are plain components; `Page` comes from `@open-slide/core`, and nothing else in the framework needs to be read:
+
+```tsx
+import type { Page } from '@open-slide/core'
+
+const CoverA: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page A */}</div>
+const CoverB: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page B */}</div>
+const CoverC: Page = () => <div style={{ width: '100%', height: '100%' }}>{/* page C */}</div>
+
+export default [CoverA, CoverB, CoverC] satisfies Page[]
+export const meta = { title: 'Style previews', createdAt: '<ISO timestamp>' }
+```
+
 - Each page is the deck's real cover: the brief's title, a subtitle from the occasion or audience, and an eyebrow such as the date or team. Only real deck content.
 - Each page uses its theme's palette, webfont stylesheet URL, and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
 - Load each webfont stylesheet once, at module top level, never inside a page component: create or update one `<link rel="stylesheet">` in `document.head` (`typeof document !== 'undefined'` guard) with id `osd-webfont-previews-a`, `-b` and `-c`, and set its `href` to the theme's stylesheet URL. A `<link>` or `@import` rendered inside a page registers the fonts again for every page.
