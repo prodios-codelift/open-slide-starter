@@ -187,6 +187,33 @@
     }
   }
 
+  // Line boxes, not the block box, so a float beside short lines is clear space.
+  const lineRects = [];
+  const walker = document.createTreeWalker(canvas, NodeFilter.SHOW_TEXT);
+  let textNode;
+  while ((textNode = walker.nextNode())) {
+    if (!(textNode.textContent || '').trim()) continue;
+    if (textNode.parentElement?.closest('[data-verify-ignore]')) continue;
+    const range = document.createRange();
+    range.selectNodeContents(textNode);
+    for (const rect of range.getClientRects()) {
+      if (rect.width >= 1 && rect.height >= 1) lineRects.push(rect);
+    }
+  }
+  for (const img of canvas.querySelectorAll('img')) {
+    if (!isRendered(img) || img.closest('[data-verify-ignore]')) continue;
+    const box = img.getBoundingClientRect();
+    // a bleed may carry type; a smaller image may not
+    if (box.width >= bounds.width * 0.8 && box.height >= bounds.height * 0.8) continue;
+    if (lineRects.some((line) => overlapArea(box, line) > TOLERANCE)) {
+      issues.push({
+        type: 'image-covers-text',
+        element: describe(img),
+        detail: 'a line of text runs through the image',
+      });
+    }
+  }
+
   override.remove();
   return { page, issues };
 })();

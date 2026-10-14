@@ -4,6 +4,7 @@ import test from 'node:test'
 
 const previews = readFileSync('.agents/skills/autopilot-previews/SKILL.md', 'utf8')
 const agents = readFileSync('AGENTS.md', 'utf8')
+const verify = readFileSync('scripts/verify-slides.js', 'utf8')
 
 test('previews read the theme index and check once', () => {
   assert.match(previews, /themes\/index\.json/)
@@ -26,6 +27,11 @@ test('autopilot deck mode skips create-slide and uses the check script', () => {
   assert.match(agents, /Do not open create-slide or slide-authoring/)
   assert.match(agents, /The "Which skill to use" list does not/)
   assert.match(agents, /scripts\/check-slides\.sh/)
+  assert.match(agents, /node_modules\/\.cache\/autopilot-shots/)
+  assert.match(agents, /pick one treatment: bleed, half, strip, or inset/)
+  assert.match(agents, /the type sits on a scrim/)
+  assert.match(verify, /image-covers-text/)
+  assert.match(verify, /a bleed may carry type/)
   assert.match(agents, /Do not run the script a third time/)
   assert.doesNotMatch(agents, /A new deck → `create-slide`/)
   assert.match(agents, /Do not read `node_modules`/)
