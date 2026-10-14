@@ -50,3 +50,9 @@ Size the placeholder to the slot it occupies. Pass `width`/`height` when the lay
 
 - ❌ Sprinkling `<ImagePlaceholder>` across pages "for visual interest". Placeholders are for content the user owns; they're not stock-photo slots.
 - ❌ Using a placeholder for an icon or decorative shape — those are typography/SVG problems, not asset problems.
+
+## Generated images (Autopilot)
+
+In a Prodios Autopilot deck, `generate_image` writes a PNG under `slides/deck/assets/<kebab-case>.png`. Import it as a module on the slide that asked for it. Every image in the deck uses the same `// image-style:` line at the top of `slides/deck/index.tsx`. After the first image, pass that PNG as `reference`.
+
+Call `generate_image` only for a slide the prompt marks `image: generate`, or when an edit's instructions or an inspector comment ask for an image. A slide that needs a screenshot, logo, real person, chart, or any file the user owns stays `<ImagePlaceholder>`. Do not generate those, and do not add an image to a slide with no image line.
