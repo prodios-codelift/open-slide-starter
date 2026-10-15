@@ -65,7 +65,7 @@ export const meta = { title: 'Style previews', createdAt: '<ISO timestamp>' }
 - Each page uses its theme's palette, webfont stylesheet URL, and its `Title`, `Eyebrow` and `Footer` components, renamed per page (`TitleA`, `TitleB`, `TitleC`, …) so all three fit in one file. Apply the theme's signature elements.
 - Load each webfont stylesheet with the `loadFont` call from the file shape above, once, at module top level, never inside a page component: create or update one `<link rel="stylesheet">` in `document.head` (`typeof document !== 'undefined'` guard) with id `osd-webfont-previews-a`, `-b` and `-c`, and set its `href` to the theme's stylesheet URL. A `<link>` or `@import` rendered inside a page registers the fonts again for every page.
 - Don't declare a `design` const — three looks can't share one. Use plain consts per page.
-- `meta`: `{ title: 'Style previews', createdAt: '<ISO timestamp>' }`. No `meta.theme`. Set `createdAt` with `node -e "console.log(new Date().toISOString())"`.
+- `meta`: `{ title: 'Style previews', createdAt: '<ISO timestamp>' }`. No `meta.theme`. Write `createdAt` as the current UTC time in ISO form, in the file. Do not run a command to get it.
 - Motion: static → none; subtle → one entrance fade on the title; rich → a short staggered entrance.
 - Never put theme names, directions, "Option A", "preview" or similar on the canvas.
 

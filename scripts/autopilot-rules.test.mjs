@@ -20,11 +20,15 @@ test('previews read the theme index and check once', () => {
   assert.match(previews, /do not read `node_modules`/)
   assert.doesNotMatch(previews, /follow the `slide-authoring` skill/)
   assert.doesNotMatch(previews, /webfonts\.md/)
+  assert.doesNotMatch(previews, /node -e/)
+  assert.match(previews, /Do not run a command to get it/)
 })
 
 test('autopilot deck mode skips create-slide and uses the check script', () => {
   assert.match(agents, /Write slides\/deck\/index\.tsx/)
   assert.match(agents, /Do not open create-slide or slide-authoring/)
+  assert.match(agents, /Run scripts\/check-slides\.sh\. Do not open that file/)
+  assert.match(agents, /Do not grep the repo/)
   assert.match(agents, /The "Which skill to use" list does not/)
   assert.match(agents, /scripts\/check-slides\.sh/)
   assert.match(agents, /node_modules\/\.cache\/autopilot-shots/)
