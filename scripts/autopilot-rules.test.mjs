@@ -27,7 +27,7 @@ test('previews read the theme index and check once', () => {
 test('autopilot deck mode skips create-slide and uses the check script', () => {
   assert.match(agents, /Write slides\/deck\/index\.tsx/)
   assert.match(agents, /Do not open create-slide or slide-authoring/)
-  assert.match(agents, /Run scripts\/check-slides\.sh\. Do not open that file/)
+  assert.match(agents, /Do not run the check until the prompt's order says so/)
   assert.match(agents, /Do not grep the repo/)
   assert.match(agents, /The "Which skill to use" list does not/)
   assert.match(agents, /scripts\/check-slides\.sh/)
